@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
+import Input from "./Input"; // Importing the Input component
+
 import { Wallet, User, Star, CodeSquare } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
@@ -21,11 +23,20 @@ const DisplayHome = () => {
   const [accountData, setAccountData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [quantity, setQuantity] = useState(1);
 
   const [users, setUsers] = useState([]);
 
   const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
+
+  const increaseQuantity = () => {
+    setQuantity((prev) => prev + 1);
+  };
+
+  const decreaseQuantity = () => {
+    setQuantity((prev) => (prev > 1 ? prev - 1 : prev));
+  };
 
   useEffect(() => {
     // ✅ Create audio only once
@@ -96,19 +107,19 @@ const DisplayHome = () => {
     };
   }, []);
 
-  useEffect(() => {
-    const loadAccountData = async () => {
-      const data = await fetchAccountData();
-      if (data) {
-        setAccountData(data);
-      } else {
-        setError("Failed to load account data.");
-      }
-    };
+  // useEffect(() => {
+  //   const loadAccountData = async () => {
+  //     const data = await fetchAccountData();
+  //     if (data) {
+  //       setAccountData(data);
+  //     } else {
+  //       setError("Failed to load account data.");
+  //     }
+  //   };
 
-    loadAccountData();
-    setLoading(false);
-  }, []);
+  //   loadAccountData();
+  //   setLoading(false);
+  // }, []);
 
   const handleCardClick = (title) => {
     // Example: Navigate to a page based on the card
@@ -139,8 +150,8 @@ const DisplayHome = () => {
     },
   ];
 
-  if (loading) return <p className="text-center text-gray-500">Loading...</p>;
-  if (error) return <p className="text-center text-red-500">Error: {error}</p>;
+  // if (loading) return <p className="text-center text-gray-500">Loading...</p>;
+  // if (error) return <p className="text-center text-red-500">Error: {error}</p>;z
 
   return (
     <div
@@ -149,7 +160,7 @@ const DisplayHome = () => {
         backgroundImage: "url('src/assets/images/background-image.png')",
       }}
     >
-      <div className="absolute top-8 left-2 px-6 py-2">
+      <div className="absolute top-4 left-2 px-2">
         <div className="flex items-center justify-center">
           <div
             className="p-4 px-6 py-6 mr-5 bg-center bg-no-repeat "
@@ -162,8 +173,9 @@ const DisplayHome = () => {
             style={{
               fontFamily: "'Jersey 20', sans-serif",
               backgroundColor: "#FFCF50",
+              fontSize: "25px", // Set your desired px value here
             }}
-            className="flex text-2xl justtify-left px-6 py-2 rounded-lg"
+            className="flex justify-left px-6 py-2 rounded-lg"
           >
             JACKPOT PRIZE: $1,500.00
           </h1>
@@ -192,33 +204,109 @@ const DisplayHome = () => {
                 {user.username} is online 🟢
               </li>
             ))
-          ) : (
-            <li className="text-gray-400">No users online {users.length}</li>
           )}
         </ul>
       </div> */}
 
       <h1
         style={{ fontFamily: "'Jersey 20', sans-serif" }}
-        className=" left-10  text-gray-800 text-4xl text-center font-bold mb-10  border-blue-500 pb-5"
+        className=" left-10  text-gray-800 text-5xl text-center font-bold mb-10  border-blue-500 pb-5 pt-10"
       >
         WINNING COMBINATIONS
       </h1>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 justify-center align-center">
-        {cards.map((card, index) => (
-          <ButtonWithSound
-            key={index}
-            onClick={() => handleCardClick(card.title)}
-            className="bg-sky-400 shadow-md rounded-lg p-6 flex items-center justify-center w-72 transition-transform transform hover:scale-105 active:scale-95"
-          >
-            <div className="p-3 bg-gray-200 rounded-full">{card.icon}</div>
-            <div className="ml-4">
-              <h2 className="text-xl font-semibold">{card.title}</h2>
-              <p className="text-gray-600">{card.value}</p>
-            </div>
-          </ButtonWithSound>
-        ))}
+
+      <div
+        className="flex flex-column justify-center"
+        style={{ marginTop: -40 }}
+      >
+        <div
+          className="p-10 bg-no-repeat bg-contain  "
+          style={{
+            backgroundImage: "url('src/assets/images/winning-bg.png')",
+          }}
+        ></div>
+        <div
+          className="p-10 bg-no-repeat bg-contain  "
+          style={{
+            backgroundImage: "url('src/assets/images/winning-bg.png')",
+          }}
+        ></div>
+        <div
+          className="p-10 bg-no-repeat bg-contain  "
+          style={{
+            backgroundImage: "url('src/assets/images/winning-bg.png')",
+          }}
+        ></div>
+        <div
+          className="p-10 bg-no-repeat bg-contain  "
+          style={{
+            backgroundImage: "url('src/assets/images/winning-bg.png')",
+          }}
+        ></div>
+        <div
+          className="p-10 bg-no-repeat bg-contain  "
+          style={{
+            backgroundImage: "url('src/assets/images/winning-bg.png')",
+          }}
+        ></div>
+        <div
+          className="p-10 bg-no-repeat bg-contain  "
+          style={{
+            backgroundImage: "url('src/assets/images/winning-bg.png')",
+          }}
+        ></div>
       </div>
+
+      <div className="flex items-center space-x-6">
+  {/* Quantity Section */}
+  <div className="flex flex-col items-center">
+    <span 
+      className="text-lg text-black"
+      style={{ fontFamily: "'Jersey 20', sans-serif" }}
+    >
+      Quantity
+    </span>
+    <div className="flex items-center border p-2 rounded-lg mt-1">
+      <button 
+        onClick={decreaseQuantity} 
+        className="px-3 py-1 bg-red-500 text-white rounded-l"
+      >
+        -
+      </button>
+      <span 
+        className="px-4 text-black"
+        style={{ fontFamily: "'Jersey 20', sans-serif" }}
+      >
+        {quantity}
+      </span>
+      <button 
+        onClick={increaseQuantity} 
+        className="px-3 py-1 bg-green-500 text-white rounded-r"
+      >
+        +
+      </button>
+    </div>
+  </div>
+
+  {/* Ticket Number Input */}
+  <div className="flex flex-col items-center">
+    <span 
+      className="text-lg text-black"
+      style={{ fontFamily: "'Jersey 20', sans-serif" }}
+    >
+      Ticket Counter
+    </span>
+    <Input 
+      type="text" 
+      placeholder="Enter ticket number" 
+      className="border rounded-lg px-4 py-2 w-40 mt-1 text-black"
+      style={{ fontFamily: "'Jersey 20', sans-serif"}}
+    />
+  </div>
+</div>
+
+
+
     </div>
   );
 };
