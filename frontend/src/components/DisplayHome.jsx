@@ -155,12 +155,12 @@ const DisplayHome = () => {
 
   return (
     <div
-      className="h-screen w-screen bg-cover bg-center bg-no-repeat"
+      className="h-screen w-screen bg-contain bg-center bg-no-repeat"
       style={{
-        backgroundImage: "url('src/assets/images/background-image.png')",
+        backgroundImage: "url('src/assets/images/bg-main-page.png')",
       }}
     >
-      <div className="absolute top-4 left-2 px-2">
+      <div className="absolute top-4 left-60 pl-10 px-2">
         <div className="flex items-center justify-center">
           <div
             className="p-4 px-6 py-6 mr-5 bg-center bg-no-repeat "
@@ -173,7 +173,7 @@ const DisplayHome = () => {
             style={{
               fontFamily: "'Jersey 20', sans-serif",
               backgroundColor: "#FFCF50",
-              fontSize: "25px", // Set your desired px value here
+              fontSize: "20px", // Set your desired px value here
             }}
             className="flex justify-left px-6 py-2 rounded-lg"
           >
@@ -208,105 +208,155 @@ const DisplayHome = () => {
         </ul>
       </div> */}
 
-      <h1
-        style={{ fontFamily: "'Jersey 20', sans-serif" }}
-        className=" left-10  text-gray-800 text-5xl text-center font-bold mb-10  border-blue-500 pb-5 pt-10"
-      >
-        WINNING COMBINATIONS
-      </h1>
+      <div className="flex  justify-center">
+        <h1
+          style={{ fontFamily: "'Jersey 20', sans-serif", fontSize: "40px" }}
+          className="mt-10 left-10  text-gray-800 text-center font-bold mb-10  border-blue-500 pb-5 pt-10"
+        >
+          WINNING COMBINATIONS
+        </h1>
+      </div>
 
       <div
         className="flex flex-column justify-center"
         style={{ marginTop: -40 }}
       >
-        <div
-          className="p-10 bg-no-repeat bg-contain  "
-          style={{
-            backgroundImage: "url('src/assets/images/winning-bg.png')",
-          }}
-        ></div>
-        <div
-          className="p-10 bg-no-repeat bg-contain  "
-          style={{
-            backgroundImage: "url('src/assets/images/winning-bg.png')",
-          }}
-        ></div>
-        <div
-          className="p-10 bg-no-repeat bg-contain  "
-          style={{
-            backgroundImage: "url('src/assets/images/winning-bg.png')",
-          }}
-        ></div>
-        <div
-          className="p-10 bg-no-repeat bg-contain  "
-          style={{
-            backgroundImage: "url('src/assets/images/winning-bg.png')",
-          }}
-        ></div>
-        <div
-          className="p-10 bg-no-repeat bg-contain  "
-          style={{
-            backgroundImage: "url('src/assets/images/winning-bg.png')",
-          }}
-        ></div>
-        <div
-          className="p-10 bg-no-repeat bg-contain  "
-          style={{
-            backgroundImage: "url('src/assets/images/winning-bg.png')",
-          }}
-        ></div>
+        {[...Array(6)].map((_, index) => (
+          <div
+            key={index}
+            className="p-15 bg-no-repeat mr-2 bg-contain w-[110px] h-[110px]"
+            style={{
+              backgroundImage: "url('src/assets/images/winning-bg.png')",
+              fontFamily: "'Jersey 20', sans-serif",
+            }}
+          >
+            <p className="text-black mt-4 ml-6 text-7xl">12</p>
+          </div>
+        ))}
       </div>
 
-      <div className="flex items-center space-x-6">
-  {/* Quantity Section */}
-  <div className="flex flex-col items-center">
-    <span 
-      className="text-lg text-black"
-      style={{ fontFamily: "'Jersey 20', sans-serif" }}
-    >
-      Quantity
-    </span>
-    <div className="flex items-center border p-2 rounded-lg mt-1">
-      <button 
-        onClick={decreaseQuantity} 
-        className="px-3 py-1 bg-red-500 text-white rounded-l"
-      >
-        -
-      </button>
-      <span 
-        className="px-4 text-black"
-        style={{ fontFamily: "'Jersey 20', sans-serif" }}
-      >
-        {quantity}
-      </span>
-      <button 
-        onClick={increaseQuantity} 
-        className="px-3 py-1 bg-green-500 text-white rounded-r"
-      >
-        +
-      </button>
-    </div>
-  </div>
+      <div className="flex w-full h-auto justify-between">
+        <div className="flex flex-col ml-80 ">
+          {/* Ticket Number Input */}
+          <div className="flex w-[220px] mt-5 h-[50px] justify-between">
+            <span
+              className=" text-black"
+              style={{
+                fontFamily: "'Jersey 20', sans-serif",
+                fontSize: "28px",
+              }}
+            >
+              TICKET COUNTER:
+            </span>
+            <span
+              className=" text-black"
+              style={{
+                fontFamily: "'Jersey 20', sans-serif",
+                fontSize: "28px",
+              }}
+            >
+              0
+            </span>
+          </div>
+          {/* Quantity Section */}
+          <div className="flex justify-between items-center  w-[220px] h-[50px]">
+            <p
+              className="justify-left text-left text-black"
+              style={{
+                fontFamily: "'Jersey 20', sans-serif",
+                fontSize: "28px",
+              }}
+            >
+              QUANTITY:
+            </p>
+            <div className="flex p-2 rounded-lg mt-1">
+              <button
+                onClick={decreaseQuantity}
+                className="py-1 px-2 bg-[#EEEEEE] text-black text-[20px]"
+              >
+                -
+              </button>
+              <p
+                className="px-4 text-black bg-[#FFFFFF] text-center items-center justified-center"
+                style={{ fontFamily: "'Jersey 20', sans-serif" }}
+              >
+                {quantity}
+              </p>
+              <button
+                onClick={increaseQuantity}
+                className="py-1 px-2 bg-[#EEEEEE] text-black text-[20px]"
+              >
+                +
+              </button>
+            </div>
+          </div>
 
-  {/* Ticket Number Input */}
-  <div className="flex flex-col items-center">
-    <span 
-      className="text-lg text-black"
-      style={{ fontFamily: "'Jersey 20', sans-serif" }}
-    >
-      Ticket Counter
-    </span>
-    <Input 
-      type="text" 
-      placeholder="Enter ticket number" 
-      className="border rounded-lg px-4 py-2 w-40 mt-1 text-black"
-      style={{ fontFamily: "'Jersey 20', sans-serif"}}
-    />
-  </div>
-</div>
-
-
-
+          <div className="flex w-full mt-5 h-auto justify-between gap-6">
+            <div
+              className="w-[120px] h-auto ml-10  rounded-lg"
+              style={{ backgroundColor: "#C14600" }}
+            >
+              <p className="text-[18px] text-center mt-1 cursor-pointer">
+                TOP UP
+              </p>
+            </div>
+            <div
+              className="w-[100px] h-10  rounded-lg"
+              style={{ backgroundColor: "#41644A" }}
+            >
+              <p className="text-[18px] text-center mt-1 cursor-pointer">PAY</p>
+            </div>
+          </div>
+          <div className="flex w-full mt-5">
+            <p
+              style={{
+                fontFamily: "'Jersey 20', sans-serif",
+                backgroundColor: "#FFCF50",
+                fontSize: "30px", // Set your desired px value here
+              }}
+              className="flex justify-left px-6 py-1 "
+            >
+              WALLET BALANCE: $90
+            </p>
+          </div>
+        </div>
+        <div
+          className="flex flex-col mr-80 "
+          style={{ fontFamily: "'Jersey 20', sans-serif" }}
+        >
+          <div className="mt-10 mr-20">
+            <input
+              type="email"
+              placeholder="Enter Bet"
+              className="w-full p-2 border-b-2 border-black bg-transparent text-4xl text-black mb-3 focus:outline-none"
+            />
+          </div>
+          <div className="flex mt-5 mr-16 relative items-center justify-center">
+            <button
+              style={{ backgroundColor: "#C14600" }}
+              className="w-60 text-[18px]"
+            >
+              LOCK IN
+            </button>
+          </div>
+          <div className="flex mt-5 mr-16 relative items-center justify-center">
+            <button
+              style={{ backgroundColor: "#41644A" }}
+              className="w-60 text-[18px]"
+            >
+              WITHDRAW CASH
+            </button>
+          </div>
+          <div className="flex mt-5 mr-16 relative items-center justify-center">
+            <button
+              style={{ backgroundColor: "#FFCF50" }}
+              className="w-60 text-[18px]"
+            >
+              HISTORY
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

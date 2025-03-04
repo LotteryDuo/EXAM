@@ -1,7 +1,7 @@
 import React from "react";
 import clickSound from "../assets/sounds/click.mp3"; // ✅ Import click sound
 
-const ButtonWithSound = ({ children, onClick, className }) => {
+const ButtonWithSound = ({ children, onClick, className, style }) => {
   const playClickSound = () => {
     const audio = new Audio(clickSound);
     audio.volume = 0.75; // ✅ Adjust volume (0.0 - 1.0)
@@ -21,6 +21,7 @@ const ButtonWithSound = ({ children, onClick, className }) => {
   return (
     <button
       onClick={handleClick}
+      style={{ style }}
       className={`${className} p-2 text-white font-semibold focus:outline-none transition`}
     >
       {children}
