@@ -55,44 +55,106 @@ const DisplayAccount = () => {
 
   return (
     <div
-      className="flex flex-col items-center justify-center p-6 h-screen w-screen bg-cover bg-center bg-no-repeat"
+      className="flex flex-col h-screen w-screen bg-contain bg-center bg-no-repeat"
       style={{
-        backgroundImage: "url('src/assets/images/background-image.png')",
+        backgroundImage: "url('src/assets/images/bg-account.png')",
+        fontFamily: "'Jersey 20', sans-serif",
       }}
     >
-      {/* Back Button */}
-      <ButtonWithSound
-        onClick={() => navigate(-1)}
-        className="flex items-center gap-2 text-white bg-gray-800 px-4 py-2 rounded-lg hover:bg-gray-700 transition self-start"
-      >
-        <ChevronLeft className="w-5 h-5" />
-        <span>Back</span>
-      </ButtonWithSound>
-
-      {/* User Info */}
-      <div className="bg-gray-800 p-6 mt-4 rounded-xl shadow-lg w-full max-w-md text-center">
-        <User className="w-12 h-12 text-blue-500 mx-auto" />
-        <h2 className="text-2xl font-bold mt-2">
-          {accountData.fullname === "" ? getUsername() : accountData.fullname}
-        </h2>
-        <p className="text-gray-400">Account Information</p>
+      <div className="flex  justify-center">
+        <h1
+          style={{ fontFamily: "'Jersey 20', sans-serif", fontSize: "40px" }}
+          className="mt-10 left-10  text-gray-800 text-center font-bold mb-10  border-blue-500 pb-5 pt-10"
+        >
+          ACCOUNT INFORMATION
+        </h1>
       </div>
-
-      {/* Balance Info */}
-      <div className="bg-gray-800 p-6 mt-4 rounded-xl shadow-lg w-full max-w-md text-center">
-        <Wallet className="w-12 h-12 text-green-500 mx-auto" />
-        <h2 className="text-3xl font-bold mt-2">₱{accountData.balance}</h2>
-        <p className="text-gray-400">Current Balance</p>
+      <div className="absolute top-[140px] left-[280px] pl-10 px-2">
+        <button
+          onClick={() => setShowLogoutPopup(true)}
+          className="w-[200px] flex  ml-70 bg-[#FFCF50] text-white rounded-lg shadow-md hover:bg-red-700 transition"
+        >
+          <p className="text-[18px] px-0 py-0">RETURN TO MAIN PAGE</p>
+        </button>
       </div>
-
-      {/* Logout Button */}
+      <div className="flex px-[320px] flex-row w-full h-auto justify-between gap-6 mt-5">
+        {/* PROFILE */}
+        <div className="flex flex-col h-[210px] w-[25%] bg-[#FBE196] rounded-lg shadow-md flex items-center justify-center mt-[65px]">
+          <div
+            className="w-[110px] h-[110px] ml-2 bg-center bg-no-repeat "
+            style={{
+              backgroundImage: "url('src/assets/images/account-img.png')",
+              backgroundSize: "contain", // or "cover"
+            }}
+          ></div>
+          <p className="text-black mt-2 text-center text-[20px]">user_nemo</p>
+        </div>
+        <div className="flex w-[75%] gap-[50px] justify-center pl-5 mt-5">
+          {/* TOTAL WINS */}
+          <div className="flex flex-col h-[150px] w-[38%] items-center justify-center">
+            <div className="flex flex-col w-[280px] h-[150px] bg-[#C14600] border-[#FFCF50] border-4 rounded-md shadow-md ">
+              <p className="text-[30px] pl-[10px] pt-[7px]">TOTAL WINS</p>
+              <p className="text-[50px] pl-[50px] pb-5">$1,000.00</p>
+            </div>
+            <div className="w-[300px]">
+              <button className="ml-[115px] mt-2 text-[24px] bg-[#41644A] px-4 py-0">
+                WITHDRAW CASH
+              </button>
+            </div>
+          </div>
+          {/* WALLET BALANCE */}
+          <div className="flex flex-col  h-[150px] w-[38%] items-center justify-center ">
+            <div className="flex flex-col w-[280px] h-[150px] bg-[#41644A] border-[#FFCF50] border-4 rounded-md shadow-md ">
+              <p className="text-[30px] pl-[10px] pt-[7px]">WALLET BALANCE</p>
+              <p className="text-[50px] pl-[50px] pb-5">$200.00</p>
+            </div>
+            <div className="w-[300px]">
+              <button className="ml-[195px] mt-2 text-[24px] bg-[#C14600] px-4 py-0">
+                TOP UP
+              </button>
+            </div>
+          </div>
+        </div>
+        <div className="absolute bottom-[140px] right-[280px] px-20 py-0">
+          <button
+            onClick={() => setShowLogoutPopup(true)}
+            className="p-0 w-[200px] flex itemsp-center justify-center bg-[#FFCF50] text-white rounded-lg shadow-md  transition"
+          >
+            <p className="text-[24px] text-center">HISTORY</p>
+          </button>
+        </div>
+        <div className="absolute bottom-[90px] right-[280px] px-20 py-0">
+          <button
+            onClick={() => setShowLogoutPopup(true)}
+            className="p-0 w-[200px] flex itemsp-center justify-center bg-[#C14600] text-white rounded-lg shadow-md  transition"
+          >
+            <p className="text-[24px] text-center">LOG OUT</p>
+          </button>
+        </div>
+        <div className="absolute bottom-[90px] right-[490px] px-20 py-0">
+          <button
+            onClick={() => setShowLogoutPopup(true)}
+            className="p-0 w-[200px] flex itemsp-center justify-center bg-[#41644A] text-white rounded-lg shadow-md  transition"
+          >
+            <p className="text-[24px] text-center">SWITCH ACCOUNT</p>
+          </button>
+        </div>
+        <div className="absolute bottom-[90px] left-[320px] ">
+          <button
+            onClick={() => setShowLogoutPopup(true)}
+            className="p-0 w-[200px] flex itemsp-center justify-center bg-[#970000] text-white rounded-lg shadow-md  transition"
+          >
+            <p className="text-[24px] text-center">DELETE ACCOUNT</p>
+          </button>
+        </div>
+      </div>
+      {/* Logout Button
       <ButtonWithSound
         onClick={() => setShowLogoutPopup(true)}
-        className="mt-6 flex items-center gap-2 bg-red-600 px-6 py-3 text-white rounded-lg shadow-md hover:bg-red-700 transition"
+        className="w-[100px] flex items-center justify-center  bg-red-600 text-white rounded-lg shadow-md hover:bg-red-700 transition"
       >
-        <LogOut className="w-5 h-5" />
-        Logout
-      </ButtonWithSound>
+        <p className="">Logout</p>
+      </ButtonWithSound> */}
 
       {/* Logout Confirmation Popup */}
       {showLogoutPopup && (
