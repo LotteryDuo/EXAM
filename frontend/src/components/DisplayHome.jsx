@@ -235,7 +235,9 @@ const DisplayHome = () => {
         ))}
       </div>
 
+      {/* FRAME WRAPPER */}
       <div className="flex w-full h-auto justify-between">
+        {/* FRAME 1 */}
         <div className="flex flex-col ml-80 ">
           {/* Ticket Number Input */}
           <div className="flex w-[220px] mt-5 h-[50px] justify-between">
@@ -258,7 +260,6 @@ const DisplayHome = () => {
               0
             </span>
           </div>
-          {/* Quantity Section */}
           <div className="flex justify-between items-center  w-[220px] h-[50px]">
             <p
               className="justify-left text-left text-black"
@@ -269,7 +270,7 @@ const DisplayHome = () => {
             >
               QUANTITY:
             </p>
-            <div className="flex p-2 rounded-lg mt-1">
+            <div className="flex p-2 rounded-lg mt-1 ml-12">
               <button
                 onClick={decreaseQuantity}
                 className="py-1 px-2 bg-[#EEEEEE] text-black text-[20px]"
@@ -311,17 +312,38 @@ const DisplayHome = () => {
             <p
               style={{
                 fontFamily: "'Jersey 20', sans-serif",
-                backgroundColor: "#FFCF50",
                 fontSize: "30px", // Set your desired px value here
               }}
-              className="flex justify-left px-6 py-1 "
+              className="flex justify-left text-black"
             >
-              WALLET BALANCE: $90
+              WALLET BALANCE:
             </p>
           </div>
+
+          <div
+            style={{
+              fontFamily: "'Jersey 20', sans-serif",
+              backgroundColor: "#FFCF50",
+            }}
+          >
+            <div className="flex flex-row items-center">
+              <div
+                className="w-[80px] h-[80px] ml-2 bg-center bg-no-repeat "
+                style={{
+                  backgroundImage: "url('src/assets/images/money-img.png')",
+                  backgroundSize: "contain", // or "cover"
+                }}
+              ></div>
+              <p className="ml-2 text-center text-black text-[36px]">
+                $ 1500.00
+              </p>
+            </div>
+          </div>
         </div>
+
+        {/* FRAME 2 */}
         <div
-          className="flex flex-col mr-80 "
+          className="flex flex-col mr-80 text-white"
           style={{ fontFamily: "'Jersey 20', sans-serif" }}
         >
           <div className="mt-10 mr-20">
@@ -354,6 +376,25 @@ const DisplayHome = () => {
             >
               HISTORY
             </button>
+          </div>
+
+          <div className="flex w-[340px] mt-[50px] ml-[65px] text-[24px] h-auto justify-between">
+            <div>
+              <p
+                style={{ backgroundColor: "#C14600" }}
+                className="w-[150px] text-center rounded-lg"
+              >
+                GAMBLERS (2)
+              </p>
+            </div>
+            <div>
+              <p
+                style={{ backgroundColor: "#41644A" }}
+                className="w-[150px] text-center rounded-lg"
+              >
+                user_nemo
+              </p>
+            </div>
           </div>
         </div>
       </div>
