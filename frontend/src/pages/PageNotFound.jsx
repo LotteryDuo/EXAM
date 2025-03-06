@@ -4,7 +4,7 @@ import Navigation from "../components/Navigation.jsx";
 
 const PageNotFound = () => {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 text-gray-800">
+    <div className="flex flex-col items-center justify-center h-screen w-screen bg-gray-100 text-gray-800">
       <Navigation />
       <h1 className="text-6xl font-bold text-blue-600 mb-4">404</h1>
       <h2 className="text-2xl font-semibold mb-2">Oops! Page Not Found</h2>
