@@ -270,15 +270,16 @@ const DisplayHome = () => {
             >
               QUANTITY:
             </p>
-            <div className="flex p-2 rounded-lg mt-1 ml-12">
+            <div className="flex items-center justify-center p-2 rounded-lg mt-1 ml-12 space-x-2">
               <button
                 onClick={decreaseQuantity}
-                className="py-1 px-2 bg-[#EEEEEE] text-black text-[20px]"
+                className="py-1 px-3 bg-[#EEEEEE] text-black text-[20px]"
               >
                 -
               </button>
               <p
-                className="px-4 text-black bg-[#FFFFFF] text-center items-center justified-center"
+                className="w-9 h-10 flex items-center justify-center text-black bg-[#FFFFFF] text-center rounded"
+
                 style={{ fontFamily: "'Jersey 20', sans-serif" }}
               >
                 {quantity}

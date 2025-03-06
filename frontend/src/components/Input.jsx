@@ -10,8 +10,13 @@ const Input = () => {
           className="form__field"
           placeholder="enter-bet"
           required
+          style={{ fontSize: "16px" }} // Change font size here
         />
-        <label htmlFor="enter-bet" className="form__label">
+        <label
+          htmlFor="enter-bet"
+          className="form__label"
+          style={{ fontSize: "14px" }}
+        >
           Enter Bet
         </label>
       </div>
@@ -34,7 +39,7 @@ const StyledWrapper = styled.div`
     border: none;
     border-bottom: 2px solid #9b9b9b;
     outline: 0;
-    font-size: 17px;
+    font-size: 14px;
     color: #fff;
     padding: 7px 0;
     background: transparent;
@@ -56,7 +61,7 @@ const StyledWrapper = styled.div`
     top: 0;
     display: block;
     transition: 0.2s;
-    font-size: 17px;
+    font-size: 10px;
     color: #9b9b9b;
     pointer-events: none;
   }
