@@ -6,7 +6,7 @@ import { io } from "socket.io-client";
 const socket = io("http://localhost:3000");
 
 const CountDown = () => {
-  const [timeLeft, setTimeLeft] = useState(60); // Start at 60 seconds
+  const [timeLeft, setTimeLeft] = useState("00"); // Start at 60 seconds
 
   useEffect(() => {
     socket.emit("join", "3001");
