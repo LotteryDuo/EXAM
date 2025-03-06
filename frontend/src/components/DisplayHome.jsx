@@ -24,6 +24,7 @@ const DisplayHome = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [quantity, setQuantity] = useState(1);
+  const [lottoInput, setLottoInput] = useState("");
 
   const [users, setUsers] = useState([]);
 
@@ -132,6 +133,15 @@ const DisplayHome = () => {
     }
   };
 
+  const handleLottoInputChange = (e) => {
+    const value = e.target.value.replace(/[^0-9]/g, ""); // Allow only numbers
+    const formattedValue = value
+      .match(/.{1,2}/g) // Split into pairs
+      ?.join(" - ") // Join with " - "
+      .slice(0, 29); // Limit to 6 pairs (2 digits each)
+    setLottoInput(formattedValue);
+  };
+
   const cards = [
     {
       title: "Lotto 6/49",
@@ -155,9 +165,10 @@ const DisplayHome = () => {
 
   return (
     <div
-      className="h-screen w-screen bg-contain bg-center bg-no-repeat"
+      className="h-screen w-screen bg-contain bg-bottom bg-no-repeat"
       style={{
         backgroundImage: "url('src/assets/images/bg-main-page.png')",
+        backgroundColor: "#F0E5C9",
       }}
     >
       <div className="absolute top-4 left-60 pl-10 px-2">
@@ -219,18 +230,18 @@ const DisplayHome = () => {
 
       <div
         className="flex flex-column justify-center"
-        style={{ marginTop: -40 }}
+        style={{ marginTop: -50 }}
       >
         {[...Array(6)].map((_, index) => (
           <div
             key={index}
-            className="p-15 bg-no-repeat mr-2 bg-contain w-[110px] h-[110px]"
+            className="p-15 bg-no-repeat mr-2 bg-contain w-[90px] h-[90px]"
             style={{
               backgroundImage: "url('src/assets/images/winning-bg.png')",
               fontFamily: "'Jersey 20', sans-serif",
             }}
           >
-            <p className="text-black mt-4 ml-6 text-7xl">12</p>
+            <p className="text-black mt-4 ml-6 text-5xl">12</p>
           </div>
         ))}
       </div>
@@ -279,7 +290,6 @@ const DisplayHome = () => {
               </button>
               <p
                 className="w-9 h-10 flex items-center justify-center text-black bg-[#FFFFFF] text-center rounded"
-
                 style={{ fontFamily: "'Jersey 20', sans-serif" }}
               >
                 {quantity}
@@ -296,17 +306,23 @@ const DisplayHome = () => {
           <div className="flex w-full mt-5 h-auto justify-between gap-6">
             <div
               className="w-[120px] h-auto ml-10  rounded-lg"
-              style={{ backgroundColor: "#C14600" }}
+              style={{
+                backgroundColor: "#C14600",
+                fontFamily: "'Jersey 20', sans-serif",
+              }}
             >
-              <p className="text-[18px] text-center mt-1 cursor-pointer">
+              <p className="text-[23px] text-center mt-1 cursor-pointer">
                 TOP UP
               </p>
             </div>
             <div
               className="w-[100px] h-10  rounded-lg"
-              style={{ backgroundColor: "#41644A" }}
+              style={{
+                backgroundColor: "#41644A",
+                fontFamily: "'Jersey 20', sans-serif",
+              }}
             >
-              <p className="text-[18px] text-center mt-1 cursor-pointer">PAY</p>
+              <p className="text-[23px] text-center mt-1 cursor-pointer">PAY</p>
             </div>
           </div>
           <div className="flex w-full mt-5">
@@ -349,9 +365,11 @@ const DisplayHome = () => {
         >
           <div className="mt-10 mr-20">
             <input
-              type="email"
+              type="text"
               placeholder="Enter Bet"
-              className="w-full p-2 border-b-2 border-black bg-transparent text-4xl text-black mb-3 focus:outline-none"
+              value={lottoInput}
+              onChange={handleLottoInputChange}
+              className="w-full p-2 border-b-2 border-black bg-transparent text-2xl text-black mb-3 focus:outline-none"
             />
           </div>
           <div className="flex mt-5 mr-16 relative items-center justify-center">

@@ -11,6 +11,7 @@ import Home from "./pages/Home.jsx";
 import Lotto from "./pages/Bet.jsx";
 import Balance from "./pages/Balance.jsx";
 import Account from "./pages/Account.jsx";
+import History from "./pages/History.jsx";
 import PageNotFound from "./pages/PageNotFound.jsx";
 
 createRoot(document.getElementById("root")).render(
@@ -23,7 +24,8 @@ createRoot(document.getElementById("root")).render(
         <Route path="/home" element={<Home />} />
         <Route path="/lotto" element={<Lotto />} />
         <Route path="/balance" element={<Balance />} />
-        <Route path="/Account" element={<Account />} />
+        <Route path="/account" element={<Account />} />
+        <Route path="/history" element={<History />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </Router>

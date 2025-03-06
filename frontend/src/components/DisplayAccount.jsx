@@ -5,6 +5,8 @@ import { io } from "socket.io-client";
 import fetchAccountData from "../utils/fetchAccountData";
 import ButtonWithSound from "./ButtonWithSound";
 
+// import ShowStatusWinning from "./ShowStatusWinning";
+
 const socket = io("http://localhost:3001");
 
 const getToken = () => sessionStorage.getItem("token");
@@ -14,6 +16,9 @@ const DisplayAccount = () => {
   const [accountData, setAccountData] = useState("");
   const [balance, setBalance] = useState(""); // Mock balance
   const [showLogoutPopup, setShowLogoutPopup] = useState(false);
+  const [popupWithdraw, setPopUpWithdraw] = useState(false);
+  const [popupTopUp, setPopUpTopUp] = useState(false);
+  const [showWinning, setShowWinning] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -51,6 +56,10 @@ const DisplayAccount = () => {
     // Clear session and redirect to login
     sessionStorage.clear();
     navigate("/sign-in");
+  };
+
+  const handleHistory = () => {
+    navigate("/history");
   };
 
   return (
@@ -97,7 +106,12 @@ const DisplayAccount = () => {
               <p className="text-[50px] pl-[50px] pb-5">$1,000.00</p>
             </div>
             <div className="w-[300px]">
-              <button className="ml-[115px] mt-2 text-[24px] bg-[#41644A] px-4 py-0">
+              <button
+                onClick={() => {
+                  setPopUpWithdraw(true);
+                }}
+                className="ml-[115px] mt-2 text-[24px] bg-[#41644A] px-4 py-0"
+              >
                 WITHDRAW CASH
               </button>
             </div>
@@ -109,7 +123,10 @@ const DisplayAccount = () => {
               <p className="text-[50px] pl-[50px] pb-5">$200.00</p>
             </div>
             <div className="w-[300px]">
-              <button className="ml-[195px] mt-2 text-[24px] bg-[#C14600] px-4 py-0">
+              <button
+                onClick={() => setPopUpTopUp(true)}
+                className="ml-[195px] mt-2 text-[24px] bg-[#C14600] px-4 py-0"
+              >
                 TOP UP
               </button>
             </div>
@@ -117,7 +134,7 @@ const DisplayAccount = () => {
         </div>
         <div className="absolute bottom-[140px] right-[280px] px-20 py-0">
           <button
-            onClick={() => setShowLogoutPopup(true)}
+            onClick={handleHistory}
             className="p-0 w-[200px] flex itemsp-center justify-center bg-[#FFCF50] text-white rounded-lg shadow-md  transition"
           >
             <p className="text-[24px] text-center">HISTORY</p>
@@ -133,7 +150,7 @@ const DisplayAccount = () => {
         </div>
         <div className="absolute bottom-[90px] right-[490px] px-20 py-0">
           <button
-            onClick={() => setShowLogoutPopup(true)}
+            onClick={() => setShowWinning("win")}
             className="p-0 w-[200px] flex itemsp-center justify-center bg-[#41644A] text-white rounded-lg shadow-md  transition"
           >
             <p className="text-[24px] text-center">SWITCH ACCOUNT</p>
@@ -141,7 +158,7 @@ const DisplayAccount = () => {
         </div>
         <div className="absolute bottom-[90px] left-[320px] ">
           <button
-            onClick={() => setShowLogoutPopup(true)}
+            onClick={() => setShowWinning("lost")}
             className="p-0 w-[200px] flex itemsp-center justify-center bg-[#970000] text-white rounded-lg shadow-md  transition"
           >
             <p className="text-[24px] text-center">DELETE ACCOUNT</p>
@@ -177,6 +194,95 @@ const DisplayAccount = () => {
                 Cancel
               </ButtonWithSound>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/*WITHDRAW Popup */}
+      {popupWithdraw && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-[#FFCF50] p-20 rounded-lg shadow-lg text-center">
+            <h2 className="text-lg font-semibold">ENTER AMOUNT TO WITHDRAW</h2>
+            <div className="inset-0">
+              <input
+                type="email"
+                className="w-full p-2 border-b-2 border-black bg-transparent text-2xl text-black mb-3 focus:outline-none"
+              />
+            </div>
+            <div className="flex justify-center gap-4">
+              <ButtonWithSound
+                onClick={() => setPopUpWithdraw(false)}
+                className="bg-[#C14600] px-4 py-2 rounded-lg text-white transition"
+              >
+                Cancel
+              </ButtonWithSound>
+              <ButtonWithSound
+                onClick={handleLogout}
+                className="bg-[#41644A] px-4 py-2 rounded-lg text-white transition"
+              >
+                WITHDRAW CASH
+              </ButtonWithSound>
+            </div>
+          </div>
+        </div>
+      )}
+      {/*TOP UP Popup */}
+      {popupTopUp && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-[#FFCF50] p-20 rounded-lg shadow-lg text-center">
+            <h2 className="text-lg font-semibold">ENTER AMOUNT TO TOP-UP</h2>
+            <div className="">
+              <input
+                type="email"
+                className="w-full p-2 border-b-2 border-black bg-transparent text-2xl text-black mb-3 focus:outline-none"
+              />
+            </div>
+            <div className="flex justify-center gap-4">
+              <ButtonWithSound
+                onClick={() => setPopUpTopUp(false)}
+                className="bg-[#C14600] px-4 py-2 rounded-lg text-white transition"
+              >
+                Cancel
+              </ButtonWithSound>
+              <ButtonWithSound
+                onClick={handleLogout}
+                className="bg-[#41644A] px-4 py-2 rounded-lg text-white transition"
+              >
+                TOP UP
+              </ButtonWithSound>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showWinning === "win" && (
+        <div className="fixed inset-0 flex items-center justify-center bg-white bg-opacity-50">
+          <div className="flex flex-col items-center">
+            <div
+              className="flex flex-row justify-center"
+              style={{ marginTop: -40 }}
+            >
+              {[...Array(8)].map((_, index) => (
+                <div
+                  key={index}
+                  className="pb-[250px] bg-no-repeat mr-2 bg-contain w-[120px] h-[110px]"
+                  style={{
+                    backgroundImage: "url('src/assets/images/winning-img.png')",
+                    fontFamily: "'Jersey 20', sans-serif",
+                  }}
+                ></div>
+              ))}
+            </div>
+            <div className=" bg-[#FFCF50] p-20 rounded-lg shadow-lg text-center mb-[200px]">
+              <h2 className="text-[50px] font-semibold text-black">YOU WON!</h2>
+            </div>
+          </div>
+        </div>
+      )}
+      {showWinning === "lost" && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-[#9E9E9E] p-20 rounded-lg shadow-lg text-center">
+            <h2 className="text-[50px] font-semibold text-black">YOU LOST!</h2>
           </div>
         </div>
       )}
