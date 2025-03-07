@@ -72,25 +72,25 @@ const DisplayAccount = () => {
     >
       <div className="flex  justify-center">
         <h1
-          style={{ fontFamily: "'Jersey 20', sans-serif", fontSize: "40px" }}
-          className="mt-10 left-10  text-gray-800 text-center font-bold mb-10  border-blue-500 pb-5 pt-10"
+          style={{ fontFamily: "'Jersey 20', sans-serif", fontSize: "30px" }}
+          className="mt-10 left-10  text-gray-800 text-center font-bold mb-10  border-blue-500 pb-5 pt-1"
         >
           ACCOUNT INFORMATION
         </h1>
       </div>
-      <div className="absolute top-[140px] left-[280px] pl-10 px-2">
+      <div className="absolute top-[90px] left-[280px] pl-10 px-2">
         <button
           onClick={() => setShowLogoutPopup(true)}
           className="w-[200px] flex  ml-70 bg-[#FFCF50] text-white rounded-lg shadow-md hover:bg-red-700 transition"
         >
-          <p className="text-[18px] px-0 py-0">RETURN TO MAIN PAGE</p>
+          <p className="text-[18px] px-1 py-0">RETURN TO MAIN PAGE</p>
         </button>
       </div>
       <div className="flex px-[320px] flex-row w-full h-auto justify-between gap-6 mt-5">
         {/* PROFILE */}
-        <div className="flex flex-col h-[210px] w-[25%] bg-[#FBE196] rounded-lg shadow-md flex items-center justify-center mt-[65px]">
+        <div className="flex flex-col h-[210px] w-[25%] bg-[#FBE196] rounded-lg shadow-md flex items-center justify-center ">
           <div
-            className="w-[110px] h-[110px] ml-2 bg-center bg-no-repeat "
+            className="w-[90px] h-[90px] ml-1 bg-center bg-no-repeat "
             style={{
               backgroundImage: "url('src/assets/images/account-img.png')",
               backgroundSize: "contain", // or "cover"
@@ -100,10 +100,10 @@ const DisplayAccount = () => {
         </div>
         <div className="flex w-[75%] gap-[50px] justify-center pl-5 mt-5">
           {/* TOTAL WINS */}
-          <div className="flex flex-col h-[150px] w-[38%] items-center justify-center">
-            <div className="flex flex-col w-[280px] h-[150px] bg-[#C14600] border-[#FFCF50] border-4 rounded-md shadow-md ">
-              <p className="text-[30px] pl-[10px] pt-[7px]">TOTAL WINS</p>
-              <p className="text-[50px] pl-[50px] pb-5">$1,000.00</p>
+          <div className="flex flex-col h-[120px] w-[38%] items-center justify-center">
+            <div className="flex flex-col w-[200px] h-[150px] bg-[#C14600] border-[#FFCF50] border-4 rounded-md shadow-md ">
+              <p className="text-[18x] pl-[10px] pt-[7px]">TOTAL WINS</p>
+              <p className="text-[40px] pl-[30px] pb-5">$1,000.00</p>
             </div>
             <div className="w-[300px]">
               <button
@@ -117,51 +117,51 @@ const DisplayAccount = () => {
             </div>
           </div>
           {/* WALLET BALANCE */}
-          <div className="flex flex-col  h-[150px] w-[38%] items-center justify-center ">
-            <div className="flex flex-col w-[280px] h-[150px] bg-[#41644A] border-[#FFCF50] border-4 rounded-md shadow-md ">
-              <p className="text-[30px] pl-[10px] pt-[7px]">WALLET BALANCE</p>
-              <p className="text-[50px] pl-[50px] pb-5">$200.00</p>
+          <div className="flex flex-col  h-[120px] w-[38%] items-center justify-center ">
+            <div className="flex flex-col w-[230px] h-[120px] bg-[#41644A] border-[#FFCF50] border-4 rounded-md shadow-md ">
+              <p className="text-[18px] pl-[10px] pt-[7px]">WALLET BALANCE</p>
+              <p className="text-[40px] pl-[20px] pb-5">$200.00</p>
             </div>
             <div className="w-[300px]">
               <button
                 onClick={() => setPopUpTopUp(true)}
-                className="ml-[195px] mt-2 text-[24px] bg-[#C14600] px-4 py-0"
+                className="ml-[200px] mt-2 text-[24px] bg-[#C14600] px-4 py-0"
               >
                 TOP UP
               </button>
             </div>
           </div>
         </div>
-        <div className="absolute bottom-[140px] right-[280px] px-20 py-0">
+        <div className="absolute bottom-[140px] right-[200px] px-20 py-0">
           <button
             onClick={handleHistory}
-            className="p-0 w-[200px] flex itemsp-center justify-center bg-[#FFCF50] text-white rounded-lg shadow-md  transition"
+            className="p-0 w-[150px] flex itemsp-center justify-center bg-[#FFCF50] text-white rounded-lg shadow-md  transition"
           >
-            <p className="text-[24px] text-center">HISTORY</p>
+            <p className="text-[20px] text-center">HISTORY</p>
           </button>
         </div>
-        <div className="absolute bottom-[90px] right-[280px] px-20 py-0">
+        <div className="absolute bottom-[90px] right-[200px] px-20 py-0">
           <button
             onClick={() => setShowLogoutPopup(true)}
-            className="p-0 w-[200px] flex itemsp-center justify-center bg-[#C14600] text-white rounded-lg shadow-md  transition"
+            className="p-0 w-[150px] flex itemsp-center justify-center bg-[#C14600] text-white rounded-lg shadow-md  transition"
           >
-            <p className="text-[24px] text-center">LOG OUT</p>
+            <p className="text-[20px] text-center">LOG OUT</p>
           </button>
         </div>
-        <div className="absolute bottom-[90px] right-[490px] px-20 py-0">
+        <div className="absolute bottom-[90px] right-[370px] px-20 py-0">
           <button
             onClick={() => setShowWinning("win")}
-            className="p-0 w-[200px] flex itemsp-center justify-center bg-[#41644A] text-white rounded-lg shadow-md  transition"
+            className="p-0 w-[180px] flex itemsp-center justify-center bg-[#41644A] text-white rounded-lg shadow-md  transition"
           >
-            <p className="text-[24px] text-center">SWITCH ACCOUNT</p>
+            <p className="text-[20px] text-center">SWITCH ACCOUNT</p>
           </button>
         </div>
         <div className="absolute bottom-[90px] left-[320px] ">
           <button
             onClick={() => setShowWinning("lost")}
-            className="p-0 w-[200px] flex itemsp-center justify-center bg-[#970000] text-white rounded-lg shadow-md  transition"
+            className="p-0 w-[180px] flex itemsp-center justify-center bg-[#970000] text-white rounded-lg shadow-md  transition"
           >
-            <p className="text-[24px] text-center">DELETE ACCOUNT</p>
+            <p className="text-[20px] text-center">DELETE ACCOUNT</p>
           </button>
         </div>
       </div>

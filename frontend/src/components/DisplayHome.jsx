@@ -134,11 +134,13 @@ const DisplayHome = () => {
   };
 
   const handleLottoInputChange = (e) => {
-    const value = e.target.value.replace(/[^0-9]/g, ""); // Allow only numbers
-    const formattedValue = value
-      .match(/.{1,2}/g) // Split into pairs
-      ?.join(" - ") // Join with " - "
-      .slice(0, 29); // Limit to 6 pairs (2 digits each)
+    let rawValue = e.target.value.replace(/[^0-9]/g, ""); // Only numbers
+    let formattedValue =
+      rawValue
+        .slice(0, 12) // Limit to 12 digits
+        .match(/.{1,2}/g) // Split into pairs
+        ?.join(" - ") || ""; // Format as "XX - XX - XX - XX - XX - XX"
+
     setLottoInput(formattedValue);
   };
 
