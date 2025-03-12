@@ -265,7 +265,7 @@ const DisplayAccount = () => {
               {[...Array(8)].map((_, index) => (
                 <div
                   key={index}
-                  className="pb-[250px] bg-no-repeat mr-2 bg-contain w-[120px] h-[110px]"
+                  className="pb-[200px] bg-no-repeat mr-2 bg-contain w-[120px] h-[110px]"
                   style={{
                     backgroundImage: "url('src/assets/images/winning-img.png')",
                     fontFamily: "'Jersey 20', sans-serif",
@@ -273,7 +273,7 @@ const DisplayAccount = () => {
                 ></div>
               ))}
             </div>
-            <div className=" bg-[#FFCF50] p-20 rounded-lg shadow-lg text-center mb-[200px]">
+            <div className=" bg-[#FFCF50] p-20 rounded-lg shadow-lg text-center mb-[100px]">
               <h2 className="text-[50px] font-semibold text-black">YOU WON!</h2>
             </div>
           </div>

@@ -25,7 +25,7 @@ const CountDown = () => {
     <div
       style={{
         fontFamily: "'Jersey 20', sans-serif",
-        backgroundColor: "#41644A",
+        backgroundColor: "#E8AC41",
         fontSize: "20px",
       }}
       className="absolute top-5 right-60 text-white mr-10  px-6 py-1 rounded-lg"

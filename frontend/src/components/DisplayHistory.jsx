@@ -18,7 +18,7 @@ const DisplayHistory = () => {
       <div className="flex justify-center">
         <h1
           style={{ fontFamily: "'Jersey 20', sans-serif", fontSize: "40px" }}
-          className="mt-10 left-10  text-gray-800 text-center font-bold mb-10  border-blue-500 pb-5 pt-10"
+          className="mt-10 left-10  text-gray-800 text-center font-bold mb-10  border-blue-500 pb-5 pt-0"
         >
           HISTORY
         </h1>
@@ -36,7 +36,7 @@ const DisplayHistory = () => {
         {[...Array(10)].map((_, index) => (
           <div
             key={index}
-            className="flex flex-row border-[#AAAAAA] border-2 shadow-2xl w-[700px] h-[130px] rounded-lg justify-between"
+            className="flex flex-row bg-white bg-opacity-10flex flex-row bg-white/20 border border-white/30 shadow-2xl backdrop-blur-md w-[700px] h-[130px] rounded-lg justify-between border border-white border-opacity-20 shadow-2xl backdrop-blur-sm w-[700px] h-[130px] rounded-lg justify-between"
             style={{
               fontFamily: "'Jersey 20', sans-serif",
             }}
@@ -45,7 +45,7 @@ const DisplayHistory = () => {
               <h1 className="text-black mt-4 ml-6 text-[14px]">
                 WINNING COMBINATION
               </h1>
-              <p className="py-1/2 ml-11 text-black text-[30px]">
+              <p className="py-1/2 ml-8 text-black text-[30px]">
                 09-45-43-11-14-28
               </p>
               <p className="text-black ml-6 text-[14px]">
@@ -55,7 +55,7 @@ const DisplayHistory = () => {
             </div>
             <div className="w-[50%]">
               <h1 className="text-black mt-4 text-[14px]">YOUR BET</h1>
-              <p className="py-1/2 ml-5 text-black text-[30px]">
+              <p className="py-1/2 ml-2 text-black text-[30px]">
                 50-43-11-21-07-01
               </p>
               <p className="text-black ml-[280px] text-[24px]">LOST</p>

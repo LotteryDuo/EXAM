@@ -173,19 +173,32 @@ const DisplayHome = () => {
         backgroundColor: "#F0E5C9",
       }}
     >
-      <div className="absolute top-4 left-60 pl-10 px-2">
+      <div
+        className="absolute"
+        style={{
+          backgroundImage: "url('src/assets/images/final-logo.png')",
+          backgroundSize: "contain",
+          backgroundRepeat: "no-repeat",
+          top: "10px",
+          left: "19%",
+          width: "180px",
+          height: "180px",
+          zIndex: "10",
+        }}
+      ></div>
+
+      <div className="absolute top-[50px] left-[210px] pl-0 px-2">
         <div className="flex items-center justify-center">
           <div
             className="p-4 px-6 py-6 mr-5 bg-center bg-no-repeat "
             style={{
-              backgroundImage: "url('src/assets/images/prize.png')",
               backgroundSize: "contain", // or "cover"
             }}
           ></div>
           <h1
             style={{
               fontFamily: "'Jersey 20', sans-serif",
-              backgroundColor: "#FFCF50",
+              backgroundColor: "#E8AC41",
               fontSize: "20px", // Set your desired px value here
             }}
             className="flex justify-left px-6 py-2 rounded-lg"
@@ -232,7 +245,7 @@ const DisplayHome = () => {
 
       <div
         className="flex flex-column justify-center"
-        style={{ marginTop: -50 }}
+        style={{ marginTop: -60 }}
       >
         {[...Array(6)].map((_, index) => (
           <div
@@ -253,12 +266,12 @@ const DisplayHome = () => {
         {/* FRAME 1 */}
         <div className="flex flex-col ml-80 ">
           {/* Ticket Number Input */}
-          <div className="flex w-[220px] mt-5 h-[50px] justify-between">
+          <div className="flex w-[200px] mt-5 h-[30px] justify-between">
             <span
               className=" text-black"
               style={{
                 fontFamily: "'Jersey 20', sans-serif",
-                fontSize: "28px",
+                fontSize: "24px",
               }}
             >
               TICKET COUNTER:
@@ -267,18 +280,18 @@ const DisplayHome = () => {
               className=" text-black"
               style={{
                 fontFamily: "'Jersey 20', sans-serif",
-                fontSize: "28px",
+                fontSize: "23px",
               }}
             >
               0
             </span>
           </div>
-          <div className="flex justify-between items-center  w-[220px] h-[50px]">
+          <div className="flex justify-between items-center  w-[220px] h-[40px]">
             <p
               className="justify-left text-left text-black"
               style={{
                 fontFamily: "'Jersey 20', sans-serif",
-                fontSize: "28px",
+                fontSize: "23px",
               }}
             >
               QUANTITY:
@@ -305,7 +318,7 @@ const DisplayHome = () => {
             </div>
           </div>
 
-          <div className="flex w-full mt-5 h-auto justify-between gap-6">
+          <div className="flex w-full mt-3 h-auto justify-between gap-6">
             <div
               className="w-[120px] h-auto ml-10  rounded-lg"
               style={{
@@ -327,11 +340,11 @@ const DisplayHome = () => {
               <p className="text-[23px] text-center mt-1 cursor-pointer">PAY</p>
             </div>
           </div>
-          <div className="flex w-full mt-5">
+          <div className="flex w-full mt-2">
             <p
               style={{
                 fontFamily: "'Jersey 20', sans-serif",
-                fontSize: "30px", // Set your desired px value here
+                fontSize: "25px", // Set your desired px value here
               }}
               className="flex justify-left text-black"
             >
@@ -342,7 +355,8 @@ const DisplayHome = () => {
           <div
             style={{
               fontFamily: "'Jersey 20', sans-serif",
-              backgroundColor: "#FFCF50",
+              backgroundColor: "#41644A",
+              borderRadius: "10px", // Adjust the px value as needed
             }}
           >
             <div className="flex flex-row items-center">
@@ -358,6 +372,19 @@ const DisplayHome = () => {
               </p>
             </div>
           </div>
+
+          <div
+            style={{
+              fontFamily: "'Jersey 20', sans-serif",
+              backgroundColor: "#C14600", // New color for differentiation
+              borderRadius: "10px", // Adjust the px value as needed
+              marginTop: "10px", // Adds space between boxes
+            }}
+          >
+            <div className="flex flex-row items-center">
+              <p className="ml-2 text-center text-white text-[30px]">sample</p>
+            </div>
+          </div>
         </div>
 
         {/* FRAME 2 */}
@@ -365,15 +392,26 @@ const DisplayHome = () => {
           className="flex flex-col mr-80 text-white"
           style={{ fontFamily: "'Jersey 20', sans-serif" }}
         >
-          <div className="mt-10 mr-20">
+          <div className="mt-5 mr-20">
+            <p
+              className="text-black"
+              style={{ fontSize: "20px", margin: "0px" }}
+            >
+              Enter Lotto Bet:
+            </p>
             <input
               type="text"
-              placeholder="Enter Bet"
+              placeholder="00-00-00-00-00-00"
               value={lottoInput}
               onChange={handleLottoInputChange}
-              className="w-full p-2 border-b-2 border-black bg-transparent text-2xl text-black mb-3 focus:outline-none"
+              className="w-full p-2 border-b-2 border-black bg-transparent text-black focus:outline-none"
+              style={{
+                fontSize: "24px", // Set font size in px
+                marginTop: "0px", // Removes top margin
+              }}
             />
           </div>
+
           <div className="flex mt-5 mr-16 relative items-center justify-center">
             <button
               style={{ backgroundColor: "#C14600" }}
@@ -399,7 +437,7 @@ const DisplayHome = () => {
             </button>
           </div>
 
-          <div className="flex w-[340px] mt-[50px] ml-[65px] text-[24px] h-auto justify-between">
+          <div className="flex w-[340px] mt-[10px] ml-[65px] text-[24px] h-auto justify-between">
             <div>
               <p
                 style={{ backgroundColor: "#C14600" }}

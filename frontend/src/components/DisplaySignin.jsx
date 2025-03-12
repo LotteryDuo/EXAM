@@ -85,7 +85,7 @@ export default function DisplayAuth() {
                 placeholder="Enter Username or Email"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                className="w-full p-2 border-b-2 border-black bg-transparent text-2xl text-black mb-3 focus:outline-none"
+                className="w-full p-2 border-b-2 border-black bg-transparent text-[18px] text-black mb-3 focus:outline-none"
               />
             </div>
 
@@ -95,7 +95,7 @@ export default function DisplayAuth() {
                 placeholder="Enter Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full p-2 border-b-2 border-black bg-transparent text-2xl text-black mb-3 focus:outline-none"
+                className="w-full p-2 border-b-2 border-black bg-transparent text-[18px] text-black mb-3 focus:outline-none"
               />
             </div>
 
@@ -118,7 +118,7 @@ export default function DisplayAuth() {
               <input
                 type="text"
                 placeholder="Enter Username"
-                className="w-full p-2 border-b-2 border-black bg-transparent text-2xl text-black mb-3 focus:outline-none"
+                className="w-full p-2 border-b-2 border-black bg-transparent text-[18px] text-black mb-3 focus:outline-none"
               />
             </div>
 
@@ -126,7 +126,7 @@ export default function DisplayAuth() {
               <input
                 type="email"
                 placeholder="Enter Email"
-                className="w-full p-2 border-b-2 border-black bg-transparent text-2xl text-black mb-3 focus:outline-none"
+                className="w-full p-2 border-b-2 border-black bg-transparent text-[18px] text-black mb-3 focus:outline-none"
               />
             </div>
 
@@ -134,7 +134,7 @@ export default function DisplayAuth() {
               <input
                 type="password"
                 placeholder="Enter Password"
-                className="w-full p-2 border-b-2 border-black bg-transparent text-2xl text-black mb-3 focus:outline-none"
+                className="w-full p-2 border-b-2 border-black bg-transparent text-[18px] text-black mb-3 focus:outline-none"
               />
             </div>
 
