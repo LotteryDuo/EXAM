@@ -92,39 +92,40 @@ const DisplayAccount = () => {
           ACCOUNT INFORMATION
         </h1>
       </div>
-      <div className="absolute top-[90px] left-[250px] pl-5 px-2">
+      <div className="absolute top-[90px] left-[50px] pl-5 px-2 width-">
         <button
           onClick={() => setShowLogoutPopup(true)}
-          className="w-[200px] flex  ml-70 bg-[#FFCF50] text-white rounded-lg shadow-md hover:bg-red-700 transition"
+          className="w-[230px] flex items-center justify-center bg-[#FFCF50] text-white rounded-lg "
         >
-          <p className="text-[1rem] px-3 py-0">RETURN TO MAIN PAGE</p>
+          <p className="text-[1.4rem] px-1 py-1">RETURN TO MAIN PAGE</p>
         </button>
       </div>
-      <div className="flex px-[320px] flex-row w-full h-auto justify-between gap-6 mt-5">
-        {/* PROFILE */}
-        <div className="flex flex-col h-[210px] w-[25%] bg-[#FBE196] rounded-lg shadow-md flex items-center justify-center ">
-          <div
-            className="w-[90px] h-[90px] ml-1 bg-center bg-no-repeat "
-            style={{
-              backgroundImage: "url('src/assets/images/account-img.png')",
-              backgroundSize: "contain", // or "cover"
-            }}
-          ></div>
-          <p className="text-black mt-2 text-center text-[20px]">user_nemo</p>
-        </div>
-        <div className="flex w-[75%] gap-[50px] justify-center pl-5 mt-5">
+      <div className="flex px-6 flex-row w-full h-auto justify-start gap-6 mt-5">
+      {/* PROFILE */}
+      <div className="flex flex-col h-[400px] w-[20%] bg-[#FBE196] rounded-lg shadow-md items-center justify-center ml-40">
+      <div
+          className="w-[150px] h-[150px] bg-center bg-no-repeat"
+          style={{
+            backgroundImage: "url('src/assets/images/account-img.png')",
+            backgroundSize: "contain", 
+          }}
+        ></div>
+        <p className="text-black mt-2 text-center text-[2rem]">user_nemo</p>
+      </div>
+
+        <div className="flex w-[75%] gap-[50px] justify-center mt-5">
           {/* TOTAL WINS */}
-          <div className="flex flex-col h-[120px] w-[38%] items-center justify-center">
-            <div className="flex flex-col w-[200px] h-[150px] bg-[#C14600] border-[#FFCF50] border-4 rounded-md shadow-md ">
-              <p className="text-[18x] pl-[10px] pt-[7px]">TOTAL WINS</p>
-              <p className="text-[40px] pl-[30px] pb-5">$1,000.00</p>
+          <div className="flex flex-col h-[120px] w-[20%] items-center justify-center">
+            <div className="flex flex-col w-[350px] h-[150px] bg-[#41644A] border-[#FFCF50] border-4 rounded-md shadow-md ">
+              <p className="text-[2rem] pl-[15px] pt-[6px]">TOTAL WINS</p>
+              <p className="text-[3rem] pl-[50px] pt-[5px] pb-[10px]">$1,000.00</p>
             </div>
             <div className="w-[300px]">
               <button
                 onClick={() => {
                   setPopUpWithdraw(true);
                 }}
-                className="ml-[115px] mt-2 text-[24px] bg-[#41644A] px-4 py-0"
+                className="ml-[115px] mt-2 text-[1.5rem] bg-[#D01010] px-4 py-0 w-[230px] h-[50px]"
               >
                 WITHDRAW CASH
               </button>
@@ -132,50 +133,53 @@ const DisplayAccount = () => {
           </div>
           {/* WALLET BALANCE */}
           <div className="flex flex-col  h-[120px] w-[38%] items-center justify-center ">
-            <div className="flex flex-col w-[230px] h-[120px] bg-[#41644A] border-[#FFCF50] border-4 rounded-md shadow-md ">
-              <p className="text-[18px] pl-[10px] pt-[7px]">WALLET BALANCE</p>
-              <p className="text-[40px] pl-[20px] pb-5">$200.00</p>
+            <div className="flex flex-col w-[350px] h-[150px] bg-[#41644A] border-[#FFCF50] border-4 rounded-md shadow-md ">
+              <p className="text-[2rem] pl-[15px] pt-[6px]">WALLET BALANCE</p>
+              <p className="text-[3rem] pl-[50px] pt-[5px] pb-[10px]">$200.00</p>
             </div>
             <div className="w-[300px]">
-              <button
-                onClick={() => setPopUpTopUp(true)}
-                className="ml-[200px] mt-2 text-[24px] bg-[#C14600] px-4 py-0"
-              >
-                TOP UP
-              </button>
+            <button
+            onClick={() => setPopUpTopUp(true)}
+            className="ml-[180px] mt-2 text-[1.5rem] bg-[#D01010] px-4 py-0 w-[150px] h-[50px]"
+          >
+            TOP UP
+          </button>
             </div>
           </div>
         </div>
-        <div className="absolute bottom-[140px] right-[200px] px-20 py-0">
-          <button
-            onClick={handleHistory}
-            className="p-0 w-[150px] flex itemsp-center justify-center bg-[#FFCF50] text-white rounded-lg shadow-md  transition"
-          >
-            <p className="text-[20px] text-center">HISTORY</p>
-          </button>
+        <div className="absolute bottom-[140px] right-[230px] px-20 py-0">
+        <button
+          onClick={handleHistory}
+          className="p-0 w-[200px] h-[50px] flex items-center justify-center bg-[#E8AC41] text-white rounded-lg shadow-md transition"
+        >
+          <p className="text-[1.5rem] text-center">HISTORY</p>
+        </button>
+      </div>
+
+      <div className="absolute bottom-[70px] right-[230px] px-20 py-0 pt-6">
+        <button
+          onClick={() => setShowLogoutPopup(true)}
+          className="p-0 w-[200px] h-[50px] flex items-center justify-center bg-[#41644A] text-white rounded-lg shadow-md transition"
+        >
+          <p className="text-[1.5rem] text-center">LOG OUT</p>
+        </button>
+      </div>
+
+      <div className="absolute bottom-[70px] right-[450px] px-20 py-0">
+        <button
+          onClick={() => setShowWinning("win")}
+          className="p-0 w-[200px] h-[50px] flex items-center justify-center bg-[#41644A] text-white rounded-lg shadow-md transition"
+        >
+          <p className="text-[1.5rem] text-center">SWITCH ACCOUNT</p>
+        </button>
+
         </div>
-        <div className="absolute bottom-[90px] right-[200px] px-20 py-0">
-          <button
-            onClick={() => setShowLogoutPopup(true)}
-            className="p-0 w-[150px] flex itemsp-center justify-center bg-[#C14600] text-white rounded-lg shadow-md  transition"
-          >
-            <p className="text-[20px] text-center">LOG OUT</p>
-          </button>
-        </div>
-        <div className="absolute bottom-[90px] right-[370px] px-20 py-0">
-          <button
-            onClick={() => setShowWinning("win")}
-            className="p-0 w-[180px] flex itemsp-center justify-center bg-[#41644A] text-white rounded-lg shadow-md  transition"
-          >
-            <p className="text-[20px] text-center">SWITCH ACCOUNT</p>
-          </button>
-        </div>
-        <div className="absolute bottom-[90px] left-[320px] ">
+        <div className="absolute bottom-[90px] left-[100px] ">
           <button
             onClick={() => setShowWinning("lost")}
-            className="p-0 w-[180px] flex itemsp-center justify-center bg-[#970000] text-white rounded-lg shadow-md  transition"
+            className="p-0 w-[250px] h-[50px] flex itemsp-center justify-center bg-[#41644A] text-white rounded-lg shadow-md  transition"
           >
-            <p className="text-[20px] text-center">DELETE ACCOUNT</p>
+            <p className="text-[1.5rem] text-center pt-2">DELETE ACCOUNT</p>
           </button>
         </div>
       </div>

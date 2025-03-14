@@ -1,15 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
-import Input from "./Input"; // Importing the Input component
-import styled from "styled-components";
-
-import { Wallet, User, Star, CodeSquare } from "lucide-react";
+import styled, { createGlobalStyle } from "styled-components";
+import { Wallet, User, Star } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-
 import backgroundMusic from "../assets/sounds/background-music.mp3";
-import ButtonWithSound from "./ButtonWithSound";
-
 import { io } from "socket.io-client";
-import fetchAccountData from "../utils/fetchAccountData";
 import CountDown from "./CountDown";
 
 const socket = io("http://localhost:3000");
@@ -105,20 +99,6 @@ const DisplayHome = () => {
     };
   }, []);
 
-  // useEffect(() => {
-  //   const loadAccountData = async () => {
-  //     const data = await fetchAccountData();
-  //     if (data) {
-  //       setAccountData(data);
-  //     } else {
-  //       setError("Failed to load account data.");
-  //     }
-  //   };
-
-  //   loadAccountData();
-  //   setLoading(false);
-  // }, []);
-
   const handleCardClick = (title) => {
     if (title === "Balance") {
       navigator("/balance");
@@ -157,9 +137,6 @@ const DisplayHome = () => {
       icon: <User className="text-blue-500 w-8 h-8" />,
     },
   ];
-
-  // if (loading) return <p className="text-center text-gray-500">Loading...</p>;
-  // if (error) return <p className="text-center text-red-500">Error: {error}</p>;z
 
   return (
     <div
@@ -206,29 +183,6 @@ const DisplayHome = () => {
 
       <CountDown />
 
-      {/* <ButtonWithSound
-        onClick={toggleSound}
-        className="absolute top-4 left-4 bg-gray-800 text-white px-4 py-2 rounded-lg"
-      >
-        {isPlaying ? "🔊 On" : "🔇 Off"}
-      </ButtonWithSound> */}
-      {/* <div className="bg-white shadow-md rounded-lg p-4 w-64 mb-6">
-        <h2
-          style={{ fontFamily: "'Jersey 20', sans-serif" }}
-          className="text-lg font-semibold text-gray-700 border-b pb-2"
-        >
-          Online Users ( {users.length} )
-        </h2>
-        <ul className="mt-2 text-sm text-gray-600">
-          {users.length > 0 ? (
-            users.map((user, index) => (
-              <li key={index} className="py-1">
-                {user.username} is online 🟢
-              </li>
-            ))
-          )}
-        </ul>
-      </div> */}
       <div className="flex justify-center">
         <h1
           style={{ fontFamily: "'Jersey 20', sans-serif", fontSize: "3rem" }}
@@ -258,7 +212,7 @@ const DisplayHome = () => {
         ))}
       </div>
 
-      <div className="flex w-full h-auto justify-between gap-10">
+      <div className="flex w-full h-auto justify-between gap-10 flex-wrap">
         <div className="flex flex-col ml-80">
           <div className="flex w-[300px] mt-1 h-[50px] justify-between">
             <span
@@ -494,6 +448,78 @@ const Button = styled.button`
     transform: translate(0);
     box-shadow: none;
   }
+`;
+
+const GlobalStyle = createGlobalStyle`
+  @media (max-width: 768px) {
+    .mobile-bg {
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      height: 100vh;
+      width: 100vw;
+    }
+
+    .rounded-lg {
+      width: 90%;
+      margin: 0 auto;
+      padding: 1rem;
+      margin-top: 6rem;
+    }
+
+    .absolute div {
+      width: 120px;
+      height: 120px;
+    }
+
+    .absolute div:nth-child(2) {
+      width: 250px;
+      height: 100px;
+    }
+
+    .flex {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .gap-8 {
+      gap: 1rem;
+    }
+
+    .text-center {
+      font-size: 1rem;
+    }
+
+    .input-container {
+      max-width: 100%;
+    }
+
+    .input-container input {
+      font-size: 1.2rem;
+    }
+
+    .input-container .label {
+      font-size: 1.2rem;
+    }
+
+    .input-container input:focus ~ .label,
+    .input-container input:valid ~ .label {
+      font-size: 1rem;
+    }
+
+    .input-container input:hover {
+      border-bottom: 2px solid #555;
+    }
+
+    .flex.mb-3.relative.items-center.justify-center {
+      margin-top: 1rem;
+    }
+
+    .absolute {
+      right: 10%;
+      top: 30%;
+    }
+  }a
 `;
 
 export default DisplayHome;
