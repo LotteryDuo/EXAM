@@ -26,9 +26,9 @@ const CountDown = () => {
       style={{
         fontFamily: "'Jersey 20', sans-serif",
         backgroundColor: "#E8AC41",
-        fontSize: "20px",
+        fontSize: "1.9rem",
       }}
-      className="absolute top-5 right-60 text-white mr-10  px-6 py-1 rounded-lg"
+      className="absolute top-10 right-5 text-white mr-10  px-6 py-1 rounded-lg"
     >
       NEXT DRAW IN: {timeLeft}s
     </div>

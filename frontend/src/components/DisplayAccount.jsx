@@ -64,26 +64,40 @@ const DisplayAccount = () => {
 
   return (
     <div
-      className="flex flex-col h-screen w-screen bg-contain bg-center bg-no-repeat"
+      className="flex flex-col h-screen w-screen bg-cover bg-center bg-no-repeat"
       style={{
         backgroundImage: "url('src/assets/images/bg-account.png')",
         fontFamily: "'Jersey 20', sans-serif",
       }}
     >
-      <div className="flex  justify-center">
+      <div
+        className="absolute"
+        style={{
+          backgroundImage: "url('src/assets/images/final-logo.png')",
+          backgroundSize: "contain",
+          backgroundRepeat: "no-repeat",
+          top: "20px",
+          left: "2%",
+          width: "200px",
+          height: "200px",
+          zIndex: "10",
+        }}
+      ></div>
+
+      <div className="flex justify-center">
         <h1
-          style={{ fontFamily: "'Jersey 20', sans-serif", fontSize: "30px" }}
-          className="mt-10 left-10  text-gray-800 text-center font-bold mb-10  border-blue-500 pb-5 pt-1"
+          style={{ fontFamily: "'Jersey 20', sans-serif", fontSize: "3rem" }}
+          className="mt-10 left-10  text-gray-800 text-center font-bold mb-10  border-blue-500 pb-5 pt-6"
         >
           ACCOUNT INFORMATION
         </h1>
       </div>
-      <div className="absolute top-[90px] left-[280px] pl-10 px-2">
+      <div className="absolute top-[90px] left-[250px] pl-5 px-2">
         <button
           onClick={() => setShowLogoutPopup(true)}
           className="w-[200px] flex  ml-70 bg-[#FFCF50] text-white rounded-lg shadow-md hover:bg-red-700 transition"
         >
-          <p className="text-[18px] px-1 py-0">RETURN TO MAIN PAGE</p>
+          <p className="text-[1rem] px-3 py-0">RETURN TO MAIN PAGE</p>
         </button>
       </div>
       <div className="flex px-[320px] flex-row w-full h-auto justify-between gap-6 mt-5">

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import Input from "./Input"; // Importing the Input component
+import styled from "styled-components";
 
 import { Wallet, User, Star, CodeSquare } from "lucide-react";
 import { useNavigate } from "react-router-dom";
@@ -40,13 +41,11 @@ const DisplayHome = () => {
   };
 
   useEffect(() => {
-    // ✅ Create audio only once
     audioRef.current = new Audio(backgroundMusic);
     audioRef.current.loop = true;
     audioRef.current.volume = 0.75;
 
     return () => {
-      // ✅ Cleanup: Stop music when component unmounts
       audioRef.current.pause();
       audioRef.current.currentTime = 0;
     };
@@ -67,7 +66,7 @@ const DisplayHome = () => {
   };
 
   useEffect(() => {
-    const username = getUsername(); // Get the username from localStorage
+    const username = getUsername();
 
     if (username) {
       socket.emit("userConnected", {
@@ -85,17 +84,15 @@ const DisplayHome = () => {
       setUsers((prevUsers) =>
         prevUsers.map((user) =>
           user.username === disconnectedUser.username
-            ? { ...user, online: false } // Mark user as offline
+            ? { ...user, online: false }
             : user
         )
       );
     };
 
-    // Listen for the updateOnlineUsers event from the server
     socket.on("updateOnlineUsers", handleUsersUpdate);
     socket.on("userDisconnected", handleUserDisconnected);
 
-    // Notify the server when the user leaves the page
     window.addEventListener("beforeunload", () => {
       if (username) {
         socket.emit("userDisconnected", { username });
@@ -103,7 +100,7 @@ const DisplayHome = () => {
     });
 
     return () => {
-      socket.off("updateOnlineUsers", handleUsersUpdate); // Cleanup on unmount
+      socket.off("updateOnlineUsers", handleUsersUpdate);
       socket.off("userDisconnected", handleUserDisconnected);
     };
   }, []);
@@ -123,7 +120,6 @@ const DisplayHome = () => {
   // }, []);
 
   const handleCardClick = (title) => {
-    // Example: Navigate to a page based on the card
     if (title === "Balance") {
       navigator("/balance");
     } else if (title === "Account") {
@@ -134,12 +130,12 @@ const DisplayHome = () => {
   };
 
   const handleLottoInputChange = (e) => {
-    let rawValue = e.target.value.replace(/[^0-9]/g, ""); // Only numbers
+    let rawValue = e.target.value.replace(/[^0-9]/g, "");
     let formattedValue =
       rawValue
-        .slice(0, 12) // Limit to 12 digits
-        .match(/.{1,2}/g) // Split into pairs
-        ?.join(" - ") || ""; // Format as "XX - XX - XX - XX - XX - XX"
+        .slice(0, 12)
+        .match(/.{1,2}/g)
+        ?.join(" - ") || "";
 
     setLottoInput(formattedValue);
   };
@@ -167,7 +163,7 @@ const DisplayHome = () => {
 
   return (
     <div
-      className="h-screen w-screen bg-contain bg-bottom bg-no-repeat"
+      className="h-screen w-screen bg-cover bg-bottom bg-no-repeat"
       style={{
         backgroundImage: "url('src/assets/images/bg-main-page.png')",
         backgroundColor: "#F0E5C9",
@@ -180,36 +176,36 @@ const DisplayHome = () => {
           backgroundSize: "contain",
           backgroundRepeat: "no-repeat",
           top: "10px",
-          left: "19%",
-          width: "180px",
-          height: "180px",
+          left: "1%",
+          width: "200px",
+          height: "200px",
           zIndex: "10",
         }}
       ></div>
 
-      <div className="absolute top-[50px] left-[210px] pl-0 px-2">
-        <div className="flex items-center justify-center">
+      <div className="absolute top-[70px] pl-0 px-1">
+        <div className="flex align-items right">
           <div
             className="p-4 px-6 py-6 mr-5 bg-center bg-no-repeat "
             style={{
-              backgroundSize: "contain", // or "cover"
+              backgroundSize: "contain",
             }}
           ></div>
           <h1
             style={{
               fontFamily: "'Jersey 20', sans-serif",
               backgroundColor: "#E8AC41",
-              fontSize: "20px", // Set your desired px value here
+              fontSize: "2rem",
             }}
-            className="flex justify-left px-6 py-2 rounded-lg"
+            className="flex justify-right px-6 py-2 rounded-lg"
           >
             JACKPOT PRIZE: $1,500.00
           </h1>
         </div>
       </div>
 
-      {/* ✅ Sound Toggle Button */}
       <CountDown />
+
       {/* <ButtonWithSound
         onClick={toggleSound}
         className="absolute top-4 left-4 bg-gray-800 text-white px-4 py-2 rounded-lg"
@@ -233,65 +229,63 @@ const DisplayHome = () => {
           )}
         </ul>
       </div> */}
-
-      <div className="flex  justify-center">
+      <div className="flex justify-center">
         <h1
-          style={{ fontFamily: "'Jersey 20', sans-serif", fontSize: "40px" }}
-          className="mt-10 left-10  text-gray-800 text-center font-bold mb-10  border-blue-500 pb-5 pt-10"
+          style={{ fontFamily: "'Jersey 20', sans-serif", fontSize: "3rem" }}
+          className="mt-10 left-10 text-gray-800 text-center font-bold mb-10 border-blue-500 pb-5 pt-10"
         >
           WINNING COMBINATIONS
         </h1>
       </div>
 
       <div
-        className="flex flex-column justify-center"
+        className="flex justify-center items-center"
         style={{ marginTop: -60 }}
       >
         {[...Array(6)].map((_, index) => (
           <div
             key={index}
-            className="p-15 bg-no-repeat mr-2 bg-contain w-[90px] h-[90px]"
+            className="flex items-center justify-center w-[140px] h-[140px] bg-no-repeat bg-contain mr-2"
             style={{
               backgroundImage: "url('src/assets/images/winning-bg.png')",
               fontFamily: "'Jersey 20', sans-serif",
             }}
           >
-            <p className="text-black mt-4 ml-6 text-5xl">12</p>
+            <p className="text-[5.5rem] text-black leading-tight flex items-center justify-center h-full w-full mr-2">
+              12
+            </p>
           </div>
         ))}
       </div>
 
-      {/* FRAME WRAPPER */}
-      <div className="flex w-full h-auto justify-between">
-        {/* FRAME 1 */}
-        <div className="flex flex-col ml-80 ">
-          {/* Ticket Number Input */}
-          <div className="flex w-[200px] mt-5 h-[30px] justify-between">
+      <div className="flex w-full h-auto justify-between gap-10">
+        <div className="flex flex-col ml-80">
+          <div className="flex w-[300px] mt-1 h-[50px] justify-between">
             <span
-              className=" text-black"
+              className="text-black"
               style={{
                 fontFamily: "'Jersey 20', sans-serif",
-                fontSize: "24px",
+                fontSize: "2rem",
               }}
             >
               TICKET COUNTER:
             </span>
             <span
-              className=" text-black"
+              className="text-black"
               style={{
                 fontFamily: "'Jersey 20', sans-serif",
-                fontSize: "23px",
+                fontSize: "2rem",
               }}
             >
               0
             </span>
           </div>
-          <div className="flex justify-between items-center  w-[220px] h-[40px]">
+          <div className="flex justify-between items-center w-[300px] h-[60px]">
             <p
               className="justify-left text-left text-black"
               style={{
                 fontFamily: "'Jersey 20', sans-serif",
-                fontSize: "23px",
+                fontSize: "2rem",
               }}
             >
               QUANTITY:
@@ -299,52 +293,47 @@ const DisplayHome = () => {
             <div className="flex items-center justify-center p-2 rounded-lg mt-1 ml-12 space-x-2">
               <button
                 onClick={decreaseQuantity}
-                className="py-1 px-3 bg-[#EEEEEE] text-black text-[20px]"
+                className="py-1 px-3 bg-[#EEEEEE] text-black text-[28px]"
               >
                 -
               </button>
               <p
                 className="w-9 h-10 flex items-center justify-center text-black bg-[#FFFFFF] text-center rounded"
-                style={{ fontFamily: "'Jersey 20', sans-serif" }}
+                style={{
+                  fontFamily: "'Jersey 20', sans-serif",
+                  fontSize: "2rem",
+                }}
               >
                 {quantity}
               </p>
               <button
                 onClick={increaseQuantity}
-                className="py-1 px-2 bg-[#EEEEEE] text-black text-[20px]"
+                className="py-1 px-2 bg-[#EEEEEE] text-black text-[28px]"
               >
                 +
               </button>
             </div>
           </div>
 
-          <div className="flex w-full mt-3 h-auto justify-between gap-6">
+          <div className="relative w-full mt-3 h-auto">
             <div
-              className="w-[120px] h-auto ml-10  rounded-lg"
+              className="absolute right-0 w-[200px] h-[50px] rounded-lg flex items-center justify-center"
               style={{
-                backgroundColor: "#C14600",
+                backgroundColor: "#D01010",
                 fontFamily: "'Jersey 20', sans-serif",
               }}
             >
-              <p className="text-[23px] text-center mt-1 cursor-pointer">
+              <p className="text-[2rem] text-center mt-0 cursor-pointer">
                 TOP UP
               </p>
             </div>
-            <div
-              className="w-[100px] h-10  rounded-lg"
-              style={{
-                backgroundColor: "#41644A",
-                fontFamily: "'Jersey 20', sans-serif",
-              }}
-            >
-              <p className="text-[23px] text-center mt-1 cursor-pointer">PAY</p>
-            </div>
           </div>
-          <div className="flex w-full mt-2">
+
+          <div className="flex w-full mt-16">
             <p
               style={{
                 fontFamily: "'Jersey 20', sans-serif",
-                fontSize: "25px", // Set your desired px value here
+                fontSize: "2rem",
               }}
               className="flex justify-left text-black"
             >
@@ -356,18 +345,18 @@ const DisplayHome = () => {
             style={{
               fontFamily: "'Jersey 20', sans-serif",
               backgroundColor: "#41644A",
-              borderRadius: "10px", // Adjust the px value as needed
+              borderRadius: "10px",
             }}
           >
             <div className="flex flex-row items-center">
               <div
-                className="w-[80px] h-[80px] ml-2 bg-center bg-no-repeat "
+                className="w-[80px] h-[80px] ml-2 bg-center bg-no-repeat"
                 style={{
                   backgroundImage: "url('src/assets/images/money-img.png')",
-                  backgroundSize: "contain", // or "cover"
+                  backgroundSize: "contain",
                 }}
               ></div>
-              <p className="ml-2 text-center text-black text-[36px]">
+              <p className="ml-2 text-center text-white text-[36px]">
                 $ 1500.00
               </p>
             </div>
@@ -376,18 +365,39 @@ const DisplayHome = () => {
           <div
             style={{
               fontFamily: "'Jersey 20', sans-serif",
-              backgroundColor: "#C14600", // New color for differentiation
-              borderRadius: "10px", // Adjust the px value as needed
-              marginTop: "10px", // Adds space between boxes
+              borderRadius: "10px",
+              marginTop: "10px",
             }}
           >
-            <div className="flex flex-row items-center">
-              <p className="ml-2 text-center text-white text-[30px]">sample</p>
+            <div className="flex w-full mt-2">
+              <p
+                style={{
+                  fontFamily: "'Jersey 20', sans-serif",
+                  fontSize: "2rem",
+                }}
+                className="flex justify-left text-black"
+              >
+                PREVIOUS BET:
+              </p>
+            </div>
+
+            <div
+              style={{
+                fontFamily: "'Jersey 20', sans-serif",
+                backgroundColor: "#41644A",
+                borderRadius: "10px",
+                height: "100%",
+              }}
+            >
+              <div className="flex flex-row items-center">
+                <p className="ml-7 mt-2 text-center text-white text-[2rem]">
+                  02-01-09-11-13-45
+                </p>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* FRAME 2 */}
         <div
           className="flex flex-col mr-80 text-white"
           style={{ fontFamily: "'Jersey 20', sans-serif" }}
@@ -395,7 +405,7 @@ const DisplayHome = () => {
           <div className="mt-5 mr-20">
             <p
               className="text-black"
-              style={{ fontSize: "20px", margin: "0px" }}
+              style={{ fontSize: "2rem", margin: "0px" }}
             >
               Enter Lotto Bet:
             </p>
@@ -405,36 +415,35 @@ const DisplayHome = () => {
               value={lottoInput}
               onChange={handleLottoInputChange}
               className="w-full p-2 border-b-2 border-black bg-transparent text-black focus:outline-none"
-              style={{
-                fontSize: "24px", // Set font size in px
-                marginTop: "0px", // Removes top margin
-              }}
+              style={{ fontSize: "2.5rem", marginTop: "0px" }}
             />
           </div>
 
           <div className="flex mt-5 mr-16 relative items-center justify-center">
-            <button
-              style={{ backgroundColor: "#C14600" }}
-              className="w-60 text-[18px]"
+            <Button
+              className="w-80 text-[2rem] py-2 px-4"
+              style={{ backgroundColor: "#D01010" }}
             >
-              LOCK IN
-            </button>
+              PLACE BET
+            </Button>
           </div>
+
           <div className="flex mt-5 mr-16 relative items-center justify-center">
-            <button
+            <Button
+              className="w-80 text-[2rem] py-2 px-4"
               style={{ backgroundColor: "#41644A" }}
-              className="w-60 text-[18px]"
             >
               WITHDRAW CASH
-            </button>
+            </Button>
           </div>
+
           <div className="flex mt-5 mr-16 relative items-center justify-center">
-            <button
-              style={{ backgroundColor: "#FFCF50" }}
-              className="w-60 text-[18px]"
+            <Button
+              className="w-80 text-[2rem] py-2 px-4"
+              style={{ backgroundColor: "#41644A" }}
             >
               HISTORY
-            </button>
+            </Button>
           </div>
 
           <div className="flex w-[340px] mt-[10px] ml-[65px] text-[24px] h-auto justify-between">
@@ -460,5 +469,31 @@ const DisplayHome = () => {
     </div>
   );
 };
+
+const Button = styled.button`
+  --bg: #000;
+  --hover-bg: #fff;
+  --hover-text: #000;
+  color: #fff;
+  cursor: pointer;
+  border: 1px solid var(--bg);
+  border-radius: 4px;
+  padding: 0.3em 2em;
+  background: var(--bg);
+  transition: 0.2s;
+
+  &:hover {
+    color: #fff;
+    transform: translate(-0.5rem, -0.5rem);
+    background: var(--hover-bg);
+    box-shadow: 0.5rem 0.5rem var(--bg),
+      0.75rem 0.75rem rgba(255, 255, 255, 0.2); /* Stronger shadow */
+  }
+
+  &:active {
+    transform: translate(0);
+    box-shadow: none;
+  }
+`;
 
 export default DisplayHome;
