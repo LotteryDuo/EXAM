@@ -140,10 +140,12 @@ const DisplayHome = () => {
 
   return (
     <div
-      className="h-screen w-screen bg-cover bg-bottom bg-no-repeat"
+      className="h-screen w-screen bg-cover bg-center bg-no-repeat centered p-0 m-0"
       style={{
         backgroundImage: "url('src/assets/images/bg-main-page.png')",
         backgroundColor: "#F0E5C9",
+        backgroundSize: "cover", // Ensures it fully covers
+        backgroundPosition: "center", // Centers the image
       }}
     >
       <div
@@ -205,15 +207,15 @@ const DisplayHome = () => {
               fontFamily: "'Jersey 20', sans-serif",
             }}
           >
-            <p className="text-[5.5rem] text-black leading-tight flex items-center justify-center h-full w-full mr-2">
+            <p className="text-[3rem] md:text-[4rem] lg:text-[5.5rem] text-black leading-tight flex items-center justify-center h-full w-full m-0">
               12
             </p>
           </div>
         ))}
       </div>
 
-      <div className="flex w-full h-auto justify-between gap-10 flex-wrap">
-        <div className="flex flex-col ml-80">
+      <div className="flex w-full h-auto justify-between gap-10 flex-col md:flex-row">
+        <div className="flex flex-col lg:ml-80 ml-0 frame-left">
           <div className="flex w-[300px] mt-1 h-[50px] justify-between">
             <span
               className="text-black"
@@ -353,7 +355,7 @@ const DisplayHome = () => {
         </div>
 
         <div
-          className="flex flex-col mr-80 text-white"
+          className="flex flex-col lg:mr-80 mr-0 text-white frame-right"
           style={{ fontFamily: "'Jersey 20', sans-serif" }}
         >
           <div className="mt-5 mr-20">
@@ -451,6 +453,14 @@ const Button = styled.button`
 `;
 
 const GlobalStyle = createGlobalStyle`
+  body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+
+} 
+    
+
   @media (max-width: 768px) {
     .mobile-bg {
       background-size: cover;
@@ -519,7 +529,94 @@ const GlobalStyle = createGlobalStyle`
       right: 10%;
       top: 30%;
     }
-  }a
+  }
+
+  @media (max-width: 1023px) {
+    .centered {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      margin-left: 0; /* Remove left margin */
+      background-size: cover !important;
+      background-position: center !important;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden; /* Prevent scrolling gaps */
+
+    }
+
+    .frame-content {
+      margin-left: 0 !important; /* Remove left margin */
+    }
+
+    .frame-left {
+      margin-left: 0 !important; /* Remove left margin */
+    }
+
+    .frame-right {
+      margin-right: 0 !important; /* Remove right margin */
+    }
+    
+    .absolute, .relative {
+    padding: 0 !important;
+    margin: 0 !important;
+
+    .frame {
+      width: 100%;
+      padding: 0 1rem;
+    }
+
+    .centered h1,
+    .centered p,
+    .centered div {
+      margin: 0 auto;
+    }
+
+    .centered .flex {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .centered .gap-10 {
+      gap: 1rem;
+    }
+
+    .centered .text-center {
+      font-size: 1.5rem;
+    }
+
+    .centered .input-container {
+      max-width: 100%;
+    }
+
+    .centered .input-container input {
+      font-size: 1.2rem;
+    }
+
+    .centered .input-container .label {
+      font-size: 1.2rem;
+    }
+
+    .centered .input-container input:focus ~ .label,
+    .centered .input-container input:valid ~ .label {
+      font-size: 1rem;
+    }
+
+    .centered .input-container input:hover {
+      border-bottom: 2px solid #555;
+    }
+
+    .centered .flex.mb-3.relative.items-center.justify-center {
+      margin-top: 1rem;
+    }
+
+    .centered .absolute {
+      right: 10%;
+      top: 30%;
+    }
+  }
 `;
 
 export default DisplayHome;

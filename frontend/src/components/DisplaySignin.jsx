@@ -292,13 +292,16 @@ const GlobalStyle = createGlobalStyle`
       background-repeat: no-repeat;
       height: 100vh;
       width: 100vw;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     .rounded-lg {
       width: 90%;
       margin: 0 auto;
       padding: 1rem;
-      margin-top: 6rem;
+      margin-top: 0;
     }
 
     .absolute div {
@@ -309,6 +312,7 @@ const GlobalStyle = createGlobalStyle`
     .absolute div:nth-child(2) {
       width: 250px;
       height: 100px;
+    }
 
     .flex {
       flex-direction: column;
@@ -351,6 +355,214 @@ const GlobalStyle = createGlobalStyle`
     .absolute {
       right: 10%;
       top: 30%;
+    }
+  }
+
+  @media (max-width: 375px) {
+    .mobile-bg {
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      height: 100vh;
+      width: 100vw;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .rounded-lg {
+      width: 90%;
+      margin: 0 auto;
+      padding: 1rem;
+      margin-top: 0;
+    }
+
+    .absolute div {
+      width: 100px;
+      height: 100px;
+    }
+
+    .absolute div:nth-child(2) {
+      width: 200px;
+      height: 80px;
+    }
+
+    .flex {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .gap-8 {
+      gap: 0.5rem;
+    }
+
+    .text-center {
+      font-size: 1.2rem;
+    }
+
+    .input-container {
+      max-width: 100%;
+    }
+
+    .input-container input {
+      font-size: 1rem;
+    }
+
+    .input-container .label {
+      font-size: 1rem;
+    }
+
+    .input-container input:focus ~ .label,
+    .input-container input:valid ~ .label {
+      font-size: 0.8rem;
+    }
+
+    .input-container input:hover {
+      border-bottom: 2px solid #555;
+    }
+
+    .flex.mb-3.relative.items-center.justify-center {
+      margin-top: 0.5rem;
+    }
+
+    .absolute {
+      right: 5%;
+      top: 25%;
+    }
+  }
+
+  @media (min-width: 376px) and (max-width: 1024px) {
+    .mobile-bg {
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      height: 100vh;
+      width: 100vw;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .rounded-lg {
+      width: 90%;
+      margin: 0 auto;
+      padding: 1rem;
+      margin-top: 0;
+    }
+
+    .absolute div {
+      width: 120px;
+      height: 120px;
+    }
+
+    .absolute div:nth-child(2) {
+      width: 250px;
+      height: 100px;
+    }
+
+    .flex {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .gap-8 {
+      gap: 1rem;
+    }
+
+    .text-center {
+      font-size: 1.5rem;
+    }
+
+    .input-container {
+      max-width: 100%;
+    }
+
+    .input-container input {
+      font-size: 1.2rem;
+    }
+
+    .input-container .label {
+      font-size: 1.2rem;
+    }
+
+    .input-container input:focus ~ .label,
+    .input-container input:valid ~ .label {
+      font-size: 1rem;
+    }
+
+    .input-container input:hover {
+      border-bottom: 2px solid #555;
+    }
+
+    .flex.mb-3.relative.items-center.justify-center {
+      margin-top: 1rem;
+    }
+
+    .absolute {
+      right: 10%;
+      top: 30%;
+    }
+  }
+
+  @media (min-width: 769px) and (max-width: 1024px) {
+    .rounded-lg {
+      width: 70%;
+      margin: 0 auto;
+      padding: 1rem;
+      margin-top: 6rem;
+    }
+
+    .absolute div {
+      width: 150px;
+      height: 150px;
+    }
+
+    .absolute div:nth-child(2) {
+      width: 300px;
+      height: 120px;
+    }
+
+    .flex {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .gap-8 {
+      gap: 1.5rem;
+    }
+
+    .text-center {
+      font-size: 1.8rem;
+    }
+
+    .input-container {
+      max-width: 90%;
+    }
+
+    .input-container input {
+      font-size: 1.4rem;
+    }
+
+    .input-container .label {
+      font-size: 1.4rem;
+    }
+
+    .input-container input:focus ~ .label,
+    .input-container input:valid ~ .label {
+      font-size: 1.2rem;
+    }
+
+    .input-container input:hover {
+      border-bottom: 2px solid #555;
+    }
+
+    .flex.mb-3.relative.items-center.justify-center {
+      margin-top: 1.5rem;
+    }
+
+    .absolute {
+      right: 15%;
+      top: 25%;
     }
   }
 `;
