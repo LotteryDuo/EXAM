@@ -20,6 +20,7 @@ const DisplayHome = () => {
   const [error, setError] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [lottoInput, setLottoInput] = useState("");
+  const [fontSize, setFontSize] = useState("2rem");
 
   const [users, setUsers] = useState([]);
 
@@ -99,6 +100,26 @@ const DisplayHome = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const updateFontSize = () => {
+      const screenWidth = window.innerWidth;
+      if (screenWidth < 600) {
+        setFontSize("1.2rem"); // Mobile
+      } else if (screenWidth < 900) {
+        setFontSize("1.5rem"); // Tablet
+      } else {
+        setFontSize("2rem"); // Desktop
+      }
+    };
+
+    window.addEventListener("resize", updateFontSize);
+    updateFontSize(); // Run on initial load
+
+    return () => {
+      window.removeEventListener("resize", updateFontSize);
+    };
+  }, []);
+
   const handleCardClick = (title) => {
     if (title === "Balance") {
       navigator("/balance");
@@ -144,8 +165,9 @@ const DisplayHome = () => {
       style={{
         backgroundImage: "url('src/assets/images/bg-main-page.png')",
         backgroundColor: "#F0E5C9",
-        backgroundSize: "cover", // Ensures it fully covers
-        backgroundPosition: "center", // Centers the image
+        backgroundSize: "cover", 
+        backgroundPosition: "center", 
+        marginTop: "0px",
       }}
     >
       <div
@@ -157,65 +179,79 @@ const DisplayHome = () => {
           top: "10px",
           left: "1%",
           width: "200px",
-          height: "200px",
+          height: "50px",
           zIndex: "10",
         }}
       ></div>
 
-      <div className="absolute top-[70px] pl-0 px-1">
-        <div className="flex align-items right">
-          <div
-            className="p-4 px-6 py-6 mr-5 bg-center bg-no-repeat "
-            style={{
-              backgroundSize: "contain",
-            }}
-          ></div>
-          <h1
-            style={{
-              fontFamily: "'Jersey 20', sans-serif",
-              backgroundColor: "#E8AC41",
-              fontSize: "2rem",
-            }}
-            className="flex justify-right px-6 py-2 rounded-lg"
-          >
-            JACKPOT PRIZE: $1,500.00
-          </h1>
-        </div>
+      <div className="absolute top-[70px] flex sm:flex-row flex-col sm:justify-start sm:items-center mobile-center px-4">
+        <h1
+          style={{
+            fontFamily: "'Jersey 20', sans-serif",
+            backgroundColor: "#E8AC41",
+            fontSize: fontSize, 
+            padding: "0.5rem 1rem", 
+          }}
+          className="rounded-lg text-left sm:text-left"
+        >
+          JACKPOT PRIZE: $1,500.00
+        </h1>
       </div>
 
-      <CountDown />
+      <div className="flex justify-center">
+        <CountDown />
+      </div>
 
       <div className="flex justify-center">
-        <h1
-          style={{ fontFamily: "'Jersey 20', sans-serif", fontSize: "3rem" }}
-          className="mt-10 left-10 text-gray-800 text-center font-bold mb-10 border-blue-500 pb-5 pt-10"
+        <WinningCombinationsTitle
+          className="text-gray-800 text-center font-bold mb-10 border-blue-500 pb-5 pt-10 sm:mt-[5%]"
+          style={{
+            marginTop: window.innerWidth <= 600 ? "130px" : "2.5rem", 
+          }}
         >
           WINNING COMBINATIONS
-        </h1>
+        </WinningCombinationsTitle>
       </div>
 
       <div
         className="flex justify-center items-center"
-        style={{ marginTop: -60 }}
+        style={{ marginTop: -60, marginLeft: "20px", marginRight: "20px" }}
       >
         {[...Array(6)].map((_, index) => (
           <div
             key={index}
-            className="flex items-center justify-center w-[140px] h-[140px] bg-no-repeat bg-contain mr-2"
+            className="flex items-center justify-center w-[120px] bg-no-repeat bg-contain m-2"
             style={{
               backgroundImage: "url('src/assets/images/winning-bg.png')",
               fontFamily: "'Jersey 20', sans-serif",
             }}
           >
-            <p className="text-[3rem] md:text-[4rem] lg:text-[5.5rem] text-black leading-tight flex items-center justify-center h-full w-full m-0">
+            <p
+              className="text-[3rem] md:text-[6rem] lg:text-[6.8rem] text-black leading-tight flex justify-center items-center w-full"
+              style={{ margin: 0, padding: 0 }}
+            >
               12
             </p>
           </div>
         ))}
       </div>
 
-      <div className="flex w-full h-auto justify-between gap-10 flex-col md:flex-row">
-        <div className="flex flex-col lg:ml-80 ml-0 frame-left">
+      <div
+        className="flex h-auto justify-between flex-col md:flex-row"
+        style={{
+          gap: "0", 
+          marginLeft: window.innerWidth <= 600 ? "50%" : "23%", 
+          marginRight: window.innerWidth <= 600 ? "10px" : "5%", 
+        }}
+      >
+        <div
+          className="flex flex-col lg:ml-80 ml-0 frame-left"
+          style={{
+            marginLeft: window.innerWidth <= 600 ? "10px" : "0", 
+            marginRight: window.innerWidth <= 600 ? "10px" : "10%", 
+            // Add margin-left for mobile
+          }}
+        >
           <div className="flex w-[300px] mt-1 h-[50px] justify-between">
             <span
               className="text-black"
@@ -271,7 +307,7 @@ const DisplayHome = () => {
             </div>
           </div>
 
-          <div className="relative w-full mt-3 h-auto">
+          <div className="relative w-full mt-3 h-auto ">
             <div
               className="absolute right-0 w-[200px] h-[50px] rounded-lg flex items-center justify-center"
               style={{
@@ -302,17 +338,25 @@ const DisplayHome = () => {
               fontFamily: "'Jersey 20', sans-serif",
               backgroundColor: "#41644A",
               borderRadius: "10px",
+              width: window.innerWidth <= 600 ? "60%" : "100%", // Reduce width for mobile
             }}
           >
             <div className="flex flex-row items-center">
               <div
-                className="w-[80px] h-[80px] ml-2 bg-center bg-no-repeat"
+                className="ml-2 bg-center bg-no-repeat"
                 style={{
+                  width: window.innerWidth <= 600 ? "60px" : "80px", // Reduce width for mobile
+                  height: window.innerWidth <= 600 ? "60px" : "80px", // Reduce height for mobile
                   backgroundImage: "url('src/assets/images/money-img.png')",
                   backgroundSize: "contain",
                 }}
               ></div>
-              <p className="ml-2 text-center text-white text-[36px]">
+              <p
+                className="ml-2 text-center text-white"
+                style={{
+                  fontSize: window.innerWidth <= 600 ? "24px" : "36px", // Adjust font size for mobile
+                }}
+              >
                 $ 1500.00
               </p>
             </div>
@@ -342,11 +386,18 @@ const DisplayHome = () => {
                 fontFamily: "'Jersey 20', sans-serif",
                 backgroundColor: "#41644A",
                 borderRadius: "10px",
-                height: "100%",
+                height: "60%",
+                width: window.innerWidth <= 600 ? "80%" : "100%",
               }}
             >
-              <div className="flex flex-row items-center">
-                <p className="ml-7 mt-2 text-center text-white text-[2rem]">
+              <div className="flex flex-row items-center w-full mt-2">
+                <p
+                  style={{
+                    fontFamily: "'Jersey 20', sans-serif",
+                    fontSize: "2rem",
+                  }}
+                  className="ml-7 text-center text-white"
+                >
                   02-01-09-11-13-45
                 </p>
               </div>
@@ -355,7 +406,7 @@ const DisplayHome = () => {
         </div>
 
         <div
-          className="flex flex-col lg:mr-80 mr-0 text-white frame-right"
+          className="flex flex-col lg:mr-80 mr-0 ml-10 text-white frame-right"
           style={{ fontFamily: "'Jersey 20', sans-serif" }}
         >
           <div className="mt-5 mr-20">
@@ -402,7 +453,7 @@ const DisplayHome = () => {
             </Button>
           </div>
 
-          <div className="flex w-[340px] mt-[10px] ml-[65px] text-[24px] h-auto justify-between">
+          <div className="flex w-[340px] mt-[10px] text-[24px] h-auto justify-between">
             <div>
               <p
                 style={{ backgroundColor: "#C14600" }}
@@ -452,22 +503,50 @@ const Button = styled.button`
   }
 `;
 
+const JackpotPrize = styled.h1`
+  font-family: "Jersey 20", sans-serif;
+  background-color: #e8ac41;
+  font-size: 2rem;
+  margin-top: 0;
+
+  @media screen and (max-width: 425px) {
+    font-size: 6rem;
+    margin-top: 90%;
+  }
+`;
+
+const WinningCombinationsTitle = styled.h1`
+  font-family: "Jersey 20", sans-serif;
+  font-size: 3rem;
+  margin-top: 2.5rem;
+  align-items: center;
+  margin-left: 30%;
+  margin-right: 30%;
+  line-height: 1;
+
+  @media screen and (max-width: 425px) {
+    margin-top: 150px; /* Ensure proper margin-top for mobile view */
+  }
+`;
+
 const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
     padding: 0;
     overflow: hidden;
+  }
 
-} 
-    
-
-  @media (max-width: 768px) {
+  @media screen and (min-width: 320px) and (max-width: 599px) {
     .mobile-bg {
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
       height: 100vh;
       width: 100vw;
+    }
+    
+    .winning-bg p {
+      margin-top: 0 !important;
     }
 
     .rounded-lg {
@@ -497,7 +576,7 @@ const GlobalStyle = createGlobalStyle`
     }
 
     .text-center {
-      font-size: 1rem;
+      font-size: 0.8rem; /* Smaller text for mobile */
     }
 
     .input-container {
@@ -505,16 +584,16 @@ const GlobalStyle = createGlobalStyle`
     }
 
     .input-container input {
-      font-size: 1.2rem;
+      font-size: 1rem; /* Smaller text for mobile */
     }
 
     .input-container .label {
-      font-size: 1.2rem;
+      font-size: 1rem; /* Smaller text for mobile */
     }
 
     .input-container input:focus ~ .label,
     .input-container input:valid ~ .label {
-      font-size: 1rem;
+      font-size: 0.8rem; /* Smaller text for mobile */
     }
 
     .input-container input:hover {
@@ -529,39 +608,51 @@ const GlobalStyle = createGlobalStyle`
       right: 10%;
       top: 30%;
     }
+
+    .h1 {
+      margin-top: 100%;
+    }
+
+    .h1, p, span, button {
+      font-size: 0.8rem !important;
+    }
   }
 
-  @media (max-width: 1023px) {
+  @media screen and (min-width: 600px) and (max-width: 899px) {
     .centered {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
-      margin-left: 0; /* Remove left margin */
+      margin-left: 0;
       background-size: cover !important;
       background-position: center !important;
       width: 100vw;
       height: 100vh;
-      overflow: hidden; /* Prevent scrolling gaps */
+      overflow: hidden;
+    }
 
+    .winning-bg p {
+      margin-top: 10px;
     }
 
     .frame-content {
-      margin-left: 0 !important; /* Remove left margin */
+      margin-left: 0 !important;
     }
 
     .frame-left {
-      margin-left: 0 !important; /* Remove left margin */
+      margin-left: 0 !important;
     }
 
     .frame-right {
-      margin-right: 0 !important; /* Remove right margin */
+      margin-right: 0 !important;
     }
-    
+
     .absolute, .relative {
-    padding: 0 !important;
-    margin: 0 !important;
+      padding: 0 !important;
+      margin: 0 !important;
+    }
 
     .frame {
       width: 100%;
@@ -616,7 +707,120 @@ const GlobalStyle = createGlobalStyle`
       right: 10%;
       top: 30%;
     }
+
+    .h1, p, span, button {
+      font-size: 1.5rem;
+    }
   }
+
+  @media screen and (min-width: 768px) and (max-width: 899px) {
+    .centered {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background-size: cover !important; /* Ensure background fully covers */
+      background-position: center !important;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .md\\:flex-row {
+      flex-direction: column !important; /* Remove row layout for tablets */
+    }
+
+    .frame-left, .frame-right {
+      flex-direction: column !important; /* Stack frames vertically */
+    }
+
+    .frame-left {
+      margin-left: 2% !important; /* Replace 23% with 2% for tablets */
+    }
+
+    .frame-right {
+      margin-right: 0 !important;
+    }
+  }
+
+  @media screen and (min-width: 900px) {
+    .centered {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      margin-left: 0;
+      background-size: cover !important;
+      background-position: center !important;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .md\\:flex-row {
+      flex-direction: row !important; /* Keep row layout for desktop */
+    }
+
+    .frame-left {
+      margin-left: 5% !important; /* Add left margin for laptops */
+    }
+
+    .frame-right {
+      margin-right: 0 !important;
+    }
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 899px) {
+    .centered {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background-size: cover !important; /* Ensure background fully covers */
+      background-position: center !important;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .frame-left, .frame-right {
+      flex-direction: column !important; /* Stack frames vertically */
+    }
+
+    .frame-left {
+      margin-left: 0 !important; /* Remove left margin for tablets */
+    }
+
+    .frame-right {
+      margin-right: 0 !important;
+    }
+  }
+
+  @media screen and (max-width: 425px) {
+    .winning-combinations-title {
+      margin-top: 90px; /* Correct margin-top adjustment for smaller screens */
+    }
+  }
+  @media (max-width: 600px) {
+  .jackpot-container {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+@media (max-width: 640px) {
+  .mobile-center {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+}
+
+
+}
+
 `;
 
 export default DisplayHome;

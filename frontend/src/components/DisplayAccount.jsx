@@ -21,6 +21,10 @@ const DisplayAccount = () => {
   const [showWinning, setShowWinning] = useState(null);
   const navigate = useNavigate();
 
+  const isMobile = window.innerWidth <= 768; 
+  const isTablet = window.innerWidth > 768 && window.innerWidth <= 1024; 
+  const isLaptop = window.innerWidth > 1024; 
+
   useEffect(() => {
     const loadAccountData = async () => {
       const data = await fetchAccountData();
@@ -62,124 +66,229 @@ const DisplayAccount = () => {
     navigate("/history");
   };
 
+  const containerStyle = {
+    backgroundImage: "url('src/assets/images/bg-account.png')",
+    fontFamily: "'Jersey 20', sans-serif",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    height: "100vh",
+    width: "100vw",
+  };
+
+  const logoStyle = {
+    backgroundImage: "url('src/assets/images/final-logo.png')",
+    backgroundSize: "contain",
+    backgroundRepeat: "no-repeat",
+    top: isMobile ? "10px" : isTablet ? "15px" : "20px",
+    left: isMobile ? "5%" : isTablet ? "3%" : "2%",
+    width: isMobile ? "100px" : isTablet ? "150px" : "200px",
+    height: isMobile ? "100px" : isTablet ? "150px" : "200px",
+    position: "absolute",
+    zIndex: "10",
+  };
+
+  const titleStyle = {
+    fontSize: isMobile ? "2rem" : isTablet ? "2.5rem" : "3rem",
+    marginTop: isMobile ? "20px" : isTablet ? "30px" : "40px",
+  };
+
+  const buttonStyle = {
+    width: isMobile ? "150px" : isTablet ? "200px" : "230px",
+    fontSize: isMobile ? "1rem" : isTablet ? "1.2rem" : "1.4rem",
+  };
+
+  const profileStyle = {
+    width: isMobile ? "90%" : isTablet ? "50%" : "30%",
+    height: isMobile ? "200px" : isTablet ? "300px" : "400px", 
+  };
+
+  const statsStyle = {
+    flexDirection: isMobile ? "column" : "row",
+    gap: isMobile ? "20px" : isTablet ? "30px" : "50px",
+  };
+
+  const buttonGroupStyle = {
+    flexDirection: isMobile ? "column" : "row",
+    gap: isMobile ? "10px" : isTablet ? "15px" : "20px",
+    marginTop: isMobile ? "0" : isTablet ? "80px" : "120px",
+  };
+
+  const buttonSpacingStyle = {
+    marginTop: isMobile ? "0" : isTablet ? "30px" : "40px",
+  };
+
   return (
     <div
       className="flex flex-col h-screen w-screen bg-cover bg-center bg-no-repeat"
-      style={{
-        backgroundImage: "url('src/assets/images/bg-account.png')",
-        fontFamily: "'Jersey 20', sans-serif",
-      }}
+      style={containerStyle}
     >
-      <div
-        className="absolute"
-        style={{
-          backgroundImage: "url('src/assets/images/final-logo.png')",
-          backgroundSize: "contain",
-          backgroundRepeat: "no-repeat",
-          top: "20px",
-          left: "2%",
-          width: "200px",
-          height: "200px",
-          zIndex: "10",
-        }}
-      ></div>
+      <div style={logoStyle}></div>
 
       <div className="flex justify-center">
         <h1
-          style={{ fontFamily: "'Jersey 20', sans-serif", fontSize: "3rem" }}
+          style={{ ...titleStyle, fontFamily: "'Jersey 20', sans-serif" }}
           className="mt-10 left-10  text-gray-800 text-center font-bold mb-10  border-blue-500 pb-5 pt-6"
         >
           ACCOUNT INFORMATION
         </h1>
       </div>
-      <div className="absolute top-[90px] left-[50px] pl-5 px-2 width-">
+      <div
+        className="absolute"
+        style={{
+          top: isMobile ? "50px" : "90px",
+          left: isMobile ? "20px" : "50px",
+          marginTop: isMobile ? "40px" : "0", 
+        }}
+      >
         <button
           onClick={() => setShowLogoutPopup(true)}
-          className="w-[230px] flex items-center justify-center bg-[#FFCF50] text-white rounded-lg "
+          className="flex items-center justify-center bg-[#FFCF50] text-white rounded-lg"
+          style={{
+            width: isMobile ? "200px" : "230px",
+            height: isMobile ? "40px" : "50px",
+            fontSize: isMobile ? "1rem" : "1.5rem",
+            whiteSpace: "nowrap", 
+          }}
         >
-          <p className="text-[1.4rem] px-1 py-1">RETURN TO MAIN PAGE</p>
+          RETURN TO MAIN PAGE
         </button>
       </div>
-      <div className="flex px-6 flex-row w-full h-auto justify-start gap-6 mt-5">
-      {/* PROFILE */}
-      <div className="flex flex-col h-[400px] w-[20%] bg-[#FBE196] rounded-lg shadow-md items-center justify-center ml-40">
       <div
-          className="w-[150px] h-[150px] bg-center bg-no-repeat"
+        className="flex px-6 flex-row w-full h-auto justify-start gap-6 mt-5"
+        style={statsStyle}
+      >
+        {/* PROFILE */}
+        <div
+          className="flex flex-col h-[600px] w-[20%] bg-[#FBE196] rounded-lg shadow-md items-center justify-center"
           style={{
-            backgroundImage: "url('src/assets/images/account-img.png')",
-            backgroundSize: "contain", 
+            ...profileStyle,
+            marginLeft: isMobile ? "20px" : "150px", 
           }}
-        ></div>
-        <p className="text-black mt-2 text-center text-[2rem]">user_nemo</p>
-      </div>
+        >
+          <div
+            className="w-[150px] h-[150px] bg-center bg-no-repeat"
+            style={{
+              backgroundImage: "url('src/assets/images/account-img.png')",
+              backgroundSize: "contain",
+              width: isMobile ? "100px" : "150px",
+              height: isMobile ? "100px" : "150px",
+            }}
+          ></div>
+          <p
+            className="text-black mt-2 text-center text-[2rem]"
+            style={{ fontSize: isMobile ? "1.5rem" : "2rem" }}
+          >
+            user_nemo
+          </p>
+        </div>
 
-        <div className="flex w-[75%] gap-[50px] justify-center mt-5">
-          {/* TOTAL WINS */}
-          <div className="flex flex-col h-[120px] w-[20%] items-center justify-center">
-            <div className="flex flex-col w-[350px] h-[150px] bg-[#41644A] border-[#FFCF50] border-4 rounded-md shadow-md ">
-              <p className="text-[2rem] pl-[15px] pt-[6px]">TOTAL WINS</p>
-              <p className="text-[3rem] pl-[50px] pt-[5px] pb-[10px]">$1,000.00</p>
+        <div
+          className={`flex ${
+            isMobile ? "flex-col items-center" : "flex-row"
+          } w-[75%] gap-[50px] justify-center mt-5`}
+          style={{
+            alignItems: isMobile ? "center" : "flex-start", 
+            gap: isMobile ? "20px" : "50px", 
+          }}
+        >
+
+
+          {/* WALLET BALANCE */}
+          <div
+            className="flex flex-col h-[120px] w-[38%] items-center justify-center"
+            style={{
+              width: isMobile ? "90%" : "38%",
+              marginLeft: isMobile ? "30%" : "0", 
+              marginTop: isMobile ? "50px" : "0",
+              alignSelf: isMobile ? "center" : "flex-start", 
+            }}
+          >
+            <div
+              className="flex flex-col w-[350px] h-[150px] bg-[#41644A] border-[#FFCF50] border-4 rounded-md shadow-md"
+              style={{
+                width: isMobile ? "100%" : "350px",
+                height: "150px",
+                marginTop: isMobile ? "0" : "-0px", 
+              }}
+            >
+              <p className="text-[2rem] pl-[15px] pt-[6px]">WALLET BALANCE</p>
+              <p className="text-[3rem] pl-[50px] pt-[5px] pb-[10px]">
+                $200.00
+              </p>
             </div>
-            <div className="w-[300px]">
+
+            {/* Buttons below Wallet Balance */}
+            <div
+              className="flex flex-row gap-4 mt-4"
+              style={{
+                justifyContent: isMobile ? "center" : "flex-start",
+                marginLeft: isMobile ? "0" : isTablet ? "10px" : "20px",
+              }}
+            >
               <button
-                onClick={() => {
-                  setPopUpWithdraw(true);
+                onClick={() => setPopUpWithdraw(true)}
+                className="text-[1.5rem] bg-[#D01010] px-4 py-2 w-[150px] h-[50px] rounded-lg text-white"
+                style={{
+                  marginBottom: isMobile ? "0" : isTablet ? "15px" : "20px",
                 }}
-                className="ml-[115px] mt-2 text-[1.5rem] bg-[#D01010] px-4 py-0 w-[230px] h-[50px]"
               >
-                WITHDRAW CASH
+                WITHDRAW
+              </button>
+              <button
+                onClick={() => setPopUpTopUp(true)}
+                className="text-[1.5rem] bg-[#D01010] px-4 py-2 w-[150px] h-[50px] rounded-lg text-white mb-5 "
+              >
+                TOP UP
               </button>
             </div>
           </div>
-          {/* WALLET BALANCE */}
-          <div className="flex flex-col  h-[120px] w-[38%] items-center justify-center ">
-            <div className="flex flex-col w-[350px] h-[150px] bg-[#41644A] border-[#FFCF50] border-4 rounded-md shadow-md ">
-              <p className="text-[2rem] pl-[15px] pt-[6px]">WALLET BALANCE</p>
-              <p className="text-[3rem] pl-[50px] pt-[5px] pb-[10px]">$200.00</p>
-            </div>
-            <div className="w-[300px]">
-            <button
-            onClick={() => setPopUpTopUp(true)}
-            className="ml-[180px] mt-2 text-[1.5rem] bg-[#D01010] px-4 py-0 w-[150px] h-[50px]"
+        </div>
+        <div
+          className="absolute"
+          style={{
+            bottom: isMobile ? "600px" : "auto",
+            right: isMobile ? "10px" : "230px",
+            display: isMobile ? "flex" : "block", 
+            flexDirection: isMobile ? "column" : "column", 
+            gap: isMobile ? "10px" : "20px",
+            marginTop: isMobile ? "0" : "150px", 
+          }}
+        >
+          <button
+            onClick={handleHistory}
+            className="p-0 flex items-center justify-center bg-[#E8AC41] text-white rounded-lg shadow-md transition"
+            style={{
+              width: isMobile ? "150px" : "250px", 
+              height: isMobile ? "40px" : "50px",
+              fontSize: isMobile ? "1rem" : "1.5rem",
+              marginTop: isMobile ? "0" : "50px",
+            }}
           >
-            TOP UP
+            HISTORY
           </button>
-            </div>
-          </div>
-        </div>
-        <div className="absolute bottom-[140px] right-[230px] px-20 py-0">
-        <button
-          onClick={handleHistory}
-          className="p-0 w-[200px] h-[50px] flex items-center justify-center bg-[#E8AC41] text-white rounded-lg shadow-md transition"
-        >
-          <p className="text-[1.5rem] text-center">HISTORY</p>
-        </button>
-      </div>
-
-      <div className="absolute bottom-[70px] right-[230px] px-20 py-0 pt-6">
-        <button
-          onClick={() => setShowLogoutPopup(true)}
-          className="p-0 w-[200px] h-[50px] flex items-center justify-center bg-[#41644A] text-white rounded-lg shadow-md transition"
-        >
-          <p className="text-[1.5rem] text-center">LOG OUT</p>
-        </button>
-      </div>
-
-      <div className="absolute bottom-[70px] right-[450px] px-20 py-0">
-        <button
-          onClick={() => setShowWinning("win")}
-          className="p-0 w-[200px] h-[50px] flex items-center justify-center bg-[#41644A] text-white rounded-lg shadow-md transition"
-        >
-          <p className="text-[1.5rem] text-center">SWITCH ACCOUNT</p>
-        </button>
-
-        </div>
-        <div className="absolute bottom-[90px] left-[100px] ">
+          <button
+            onClick={() => setShowLogoutPopup(true)}
+            className="p-0 flex items-center justify-center bg-[#41644A] text-white rounded-lg shadow-md transition"
+            style={{
+              width: isMobile ? "150px" : "250px", 
+              height: isMobile ? "40px" : "50px",
+              fontSize: isMobile ? "1rem" : "1.5rem",
+              marginTop: isMobile ? "0" : "20px", 
+            }}
+          >
+            LOG OUT
+          </button>
           <button
             onClick={() => setShowWinning("lost")}
-            className="p-0 w-[250px] h-[50px] flex itemsp-center justify-center bg-[#41644A] text-white rounded-lg shadow-md  transition"
+            className="p-0 flex items-center justify-center bg-[#D01010] text-white rounded-lg shadow-md transition"
+            style={{
+              width: isMobile ? "150px" : "250px", 
+              height: isMobile ? "40px" : "50px",
+              fontSize: isMobile ? "1rem" : "1.5rem",
+              marginTop: isMobile ? "0" : "20px", 
+            }}
           >
-            <p className="text-[1.5rem] text-center pt-2">DELETE ACCOUNT</p>
+            DELETE ACCOUNT
           </button>
         </div>
       </div>
